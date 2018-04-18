@@ -52,6 +52,7 @@ Router.map(function() {
     this.route('play',{path:'/play/:quizId'});
     this.route('grid');
   });
+  this.route('question');
 });
 
 export default Router;
