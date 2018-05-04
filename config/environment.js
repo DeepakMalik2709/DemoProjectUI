@@ -9,7 +9,9 @@ module.exports = function(environment) {
     'ember-light-table': {
         enableSync: true
       },
-   
+
+
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-		notifications: Ember.inject.service('notification-messages'),
+	//	notifications: Ember.inject.service('notification-messages'),
 		quizService: Ember.inject.service('quiz'),
 		quesService: Ember.inject.service('question'),
 		groupService: Ember.inject.service('group'),
@@ -45,12 +45,12 @@ export default Ember.Route.extend({
 					}
  				this.get('quizService').saveQuiz(quiz).then((result)=>{
 							if(result.code == 0){
-								this.get('notifications').setDefaultAutoClear(true);
-							 this.get('notifications').success('Quiz saved successfully.');
+						//		this.get('notifications').setDefaultAutoClear(true);
+						//	 this.get('notifications').success('Quiz saved successfully.');
 									this.transitionTo('quiz.grid');
 						}else{
-							this.get('notifications').setDefaultAutoClear(true);
-						 this.get('notifications').success('Oop some error ! Please contact to admin .');
+						//	this.get('notifications').setDefaultAutoClear(true);
+						// this.get('notifications').success('Oop some error ! Please contact to admin .');
 
 						}
 					});
