@@ -32,28 +32,9 @@ export default Ember.Mixin.create(utilsMixin , {
 				let photoUrl = this.getPhotoUrl(Ember.get(item, 'createdByEmail'));
 				Ember.set(item, "photoUrl", photoUrl);
 				if(!item.comments){
-					/*for(var i =0; i< item.comments.length;i++){
-						var thisComment = item.comments[i];
-						this.cleanupTimes(thisComment);
-						photoUrl = this.getPhotoUrl(thisComment.createdByEmail);
-						Ember.set(thisComment, "photoUrl", photoUrl);
-					}
-				}else{*/
 					Ember.set(item, "comments", []);
 				}
 			}
 			this.cleanupTimes(item);
-		},
-		updateRecipients(item){
-			var html = "<div>" +  Ember.get(item , "comment")  + "</div>";
-			var arr = [];
-			$(html).find("[data-email]").each(function(elem){
-				if(!$(this).hasClass("inactive")){
-					var email = $(this).attr("data-email");
-					arr.push({email : email, label : email});
-				}
-			});
-			Ember.set(item, "recipients", arr);
-		},
-		myList : [{email : 'jitender@nicefact.co.in' , label:'jitender'}, {email : 'harish@nicefact.co.in', label : 'harish'}],
+		}
 });

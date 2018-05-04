@@ -28,15 +28,31 @@
                               {{textarea type="text" value=model.description class="form-control" placeholder="Description"}}
                         </div>
 
-                       {{task-item-deadline item=model title="Quiz Start Time" fieldName='fromDateTime' }}
-					             {{task-item-deadline item=model title="Quiz End Time" fieldName='toDateTime' }}
+                        {{#if  model.withTime}}
+                            <button  class="btn btn-info" {{action 'includeTimeLine' model}}>without time</button>
+                      {{else}}
 
-                       <div class="form-group mtop10" >
-                         {{#power-select-multiple selected=selectedGroups options=myGroups  placeholder="Please, select Group"
-                              onchange=(action (mut selectedGroups))  as |attendees| }}
-                                {{attendees.name}}                          {{/power-select-multiple}}
-                      </div>
+                            <button  class="btn btn-info" {{action 'includeTimeLine' model}}>with time</button>
+                        {{/if}}
+                        {{#if model.withTime}}
+                            {{task-item-deadline item=model title="Quiz Start Time" fieldName='fromDateTime' }}
+                            {{task-item-deadline item=model title="Quiz End Time" fieldName='toDateTime' }}
+                        {{/if}}
 
+
+                        <div class="form-group mtop10" >
+                          {{#power-select-multiple selected=selectedShareWith options=myShareWith  placeholder="Please, select Group"
+                               onchange=(action (mut selectedShareWith))  as |share| }}
+                                 {{share}}                          {{/power-select-multiple}}
+                        </div>
+
+                        {{#if  shareWithGroup}}
+                          <div class="form-group mtop10" >
+                              {{#power-select-multiple selected=selectedGroups options=myGroups  placeholder="Please, select Group"
+                                onchange=(action (mut selectedGroups))  as |attendees| }}
+                                  {{attendees.name}}                          {{/power-select-multiple}}
+                          </div>
+                      {{/if}}
                       <div class="form-group mtop10" >
                         {{#power-select-multiple selected=selectedques options=myQuestions  placeholder="Please, select question"
                              onchange=(action (mut selectedques))  as |ques| }}

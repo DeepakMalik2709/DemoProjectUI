@@ -17,6 +17,7 @@ export default DS.Model.extend({
 		}),
   groups:  DS.attr( {
 			defaultValue() { return []; }
-		})
-
+		}),
+	withTime: DS.attr('boolean'),
+  shareWith: DS.attr('string'),
 });

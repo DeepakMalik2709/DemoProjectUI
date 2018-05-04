@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-		notifications: Ember.inject.service('notification-messages'),
+	//	notifications: Ember.inject.service('notification-messages'),
 		quizService: Ember.inject.service('quiz'),
 		quesService: Ember.inject.service('question'),
 		groupService: Ember.inject.service('group'),
@@ -34,23 +34,15 @@ export default Ember.Route.extend({
     },
 
     actions: {
-			upsertQuiz(quiz,selGrp,selQue) {
-				 console.log(quiz.toJSON());
-
-					for(var i =0 ;i < selGrp.length ;i++){
-						quiz.get("groups").pushObject(selGrp[i].id);
-					}
-					for(var i =0 ;i < selQue.length ;i++){
-						quiz.get("questions").pushObject({"id":selQue[i].id});
-					}
- 				this.get('quizService').saveQuiz(quiz).then((result)=>{
+			upsertQuiz(quiz) {				
+				this.get('quizService').saveQuiz(quiz).then((result)=>{
 							if(result.code == 0){
-								this.get('notifications').setDefaultAutoClear(true);
-							 this.get('notifications').info('Quiz saved successfully.');
+			//						this.get('notifications').setDefaultAutoClear(true);
+			//				 this.get('notifications').info('Quiz saved successfully.');
 									this.transitionTo('quiz.grid');
 						}else{
-							this.get('notifications').setDefaultAutoClear(true);
-						 this.get('notifications').info('Oop some error ! Please contact to admin .');
+				//			this.get('notifications').setDefaultAutoClear(true);
+					//	 this.get('notifications').info('Oop some error ! Please contact to admin .');
 
 						}
 					});
