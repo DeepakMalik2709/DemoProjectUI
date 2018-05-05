@@ -7,7 +7,8 @@ dateFormat:function(value){ var date =new Date(value); return date.getDay()+"/"+
     tableSchema:[{ label: 'Name',		className:'time', sortable: true,	      valuePath: 'name',	     width: '20%'	    },
                 { label: 'Subject',	className:'time',	  sortable: true,	      valuePath: 'subject',     width: '30%'	    },
                 { label: 'From',	className:'time',	  sortable: true,	      valuePath: 'fromDateTime' , width: '20%'	,format:function(value){ return new Date(value);}},
-                 { label: 'To',		className:'time',    sortable: true,	      valuePath: 'toDateTime',	width: '20%'	,format:function(value){  return new Date(value);}   }],
+                 { label: 'To',		className:'time',    sortable: true,	      valuePath: 'toDateTime',	width: '20%'	,format:function(value){  return new Date(value);}},
+                 { label: 'Share link',	className:'time',	  sortable: true,	      valuePath: 'shareLink',     width: '30%'	    }],
 
 	model() {
         return  this.store.findAll('quiz');

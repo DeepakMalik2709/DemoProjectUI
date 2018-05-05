@@ -20,4 +20,5 @@ export default DS.Model.extend({
 		}),
 	withTime: DS.attr('boolean'),
   shareWith: DS.attr('string'),
+	shareLink: DS.attr('string')
 });
