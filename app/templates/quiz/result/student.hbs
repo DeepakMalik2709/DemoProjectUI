@@ -20,9 +20,11 @@
        <form role="form">
            <div class="box-body">
               <div class="form-group overflow-hide">
-                <div style="">
+                <div>
                    {{#each model.questions as |question|}}
-                      <button {{action "clickQuesionNo" question}}>{{question.number}}</button>
+                      <button {{action "clickQuesionNo" question}}>
+                        {{question.number}}
+                      </button>
                    {{/each}}
                 </div>
                 <br>
@@ -32,11 +34,31 @@
                    </p>
                    <ul class="answers">
                    {{#each selectedQuestion.options as |option|}}
-                       <input type="radio" name="option.title" value="option" id="option.id"><label for="option.title"> ({{option.number}}) {{option.title}}</label><br/>
+                       <input type="radio" name="option.title" value="option" id="option.id"><label for="option.title" style="margin-left: 8px">({{option.number}}) {{option.title}}</label><br/>
                      {{/each}}
                    </ul>
                 </div>
               </div>
+
+              <div class="row" style="background-color: #f5f5f5;">
+                <div class="col-md-12">
+                  Your Answer : (A){{selectedQuestion.markedAnswer}}<br>
+                  Correct Answer : (C){{selectedQuestion.correctAnswer}}
+                </div>
+              </div>
+              <br>
+              <div class="row" style="background-color: #f5f5f5;">
+                <div class="col-md-12">
+                  <b>Detailed Solution:</b>
+                  <p>
+                    The reason is tha bubble sort is the fastest.
+                    {{selectedQuestion.detailSolution}}
+                  </p>
+                </div>
+
+              </div>
+
+
               <div class="box-footer overflow-hide">
                   <div class="row">
                     <div class="col-md-4">
@@ -49,7 +71,6 @@
                       <button type="submit" disabled={{isNextDisabled}} class="btn btn-primary" {{action 'nextQuestion'}} >Next</button>
                     </div>
                   </div>
-
               </div>
           </div><!-- /.box-body -->
        </form>

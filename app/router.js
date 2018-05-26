@@ -51,6 +51,8 @@ Router.map(function() {
     this.route('upsert',{path:'/upsert/:quizId'});
     this.route('play',{path:'/play/:quizId'});
     this.route('grid');
+    this.route('result.organiser',{path : '/result/organiser'});
+    this.route('result.student',{path : '/result/student'});
   });
   this.route('question');
 });

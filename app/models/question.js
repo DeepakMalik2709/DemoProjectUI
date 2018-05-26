@@ -3,9 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 	dbFields : ["id","description","title", "tag" , "marks", "type", "number", "options"],
 
-	description: DS.attr('string'),
-	title: DS.attr('string'),
-	tag: DS.attr('string'),
+	questionDescription: DS.attr('string'),
 	createdByEmail: DS.attr('string'),
   marks: DS.attr('string'),
   type: DS.attr('string'),
@@ -13,6 +11,6 @@ export default DS.Model.extend({
 	options:  DS.attr( {
 			defaultValue() { return []; }
 		})
-	
+
 
 });
