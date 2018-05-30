@@ -30,7 +30,7 @@ dateFormat:function(value){ var date =new Date(value); return date.getDay()+"/"+
           console.log(user);
           console.log(row.get('createdByEmail'));
           if(user.email ===row.get('createdByEmail')){
-            this.transitionTo('quiz.upsert',row.get('id'));
+            this.transitionTo('quiz.play',row.get('id'));
           }else{
             this.transitionTo('quiz.play',row.get('id'));
           }

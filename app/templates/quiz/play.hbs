@@ -17,41 +17,6 @@
        </div><!-- /.box-header -->
        <br>
        <!-- form start -->
-       <form role="form">
-           <div class="box-body">
-              <div class="form-group overflow-hide">
-                <div style="">
-                   {{#each model.questions as |question|}}
-                      <button {{action "clickQuesionNo" question}}>{{question.number}}</button>
-                   {{/each}}
-                </div>
-                <br>
-                <div>
-                   <p class="question">
-                     <b>({{selectedQuestion.number}}) {{selectedQuestion.title}}</b>
-                   </p>
-                   <ul class="answers">
-                   {{#each selectedQuestion.options as |option|}}
-                       <input type="radio" name="option.title" value="option" id="option.id"><label for="option.title"> ({{option.number}}) {{option.title}}</label><br/>
-                     {{/each}}
-                   </ul>
-                </div>
-              </div>
-              <div class="box-footer overflow-hide">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <button type="submit" class="btn btn-primary" {{action 'saveTask' model}} >Finish Quiz</button>
-                    </div>
-                    <div class="col-md-4">
-                      <button type="submit" disabled={{isPrevDisabled}} class="btn btn-primary" {{action 'previousQuestion'}} >Previous</button>
-                    </div>
-                    <div class="col-md-4">
-                      <button type="submit" disabled={{isNextDisabled}} class="btn btn-primary" {{action 'nextQuestion'}} >Next</button>
-                    </div>
-                  </div>
-
-              </div>
-          </div><!-- /.box-body -->
-       </form>
+        {{quiz-play items=model.questions saveAnsweredQuestion="saveAnsweredQuestion"}}
    </div><!-- /.box -->
 </div>

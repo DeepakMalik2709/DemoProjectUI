@@ -1,0 +1,35 @@
+<form role="form">
+   <div class="box-body">
+      <div class="form-group overflow-hide">
+        <div style="">
+           {{#each sortedQuestions as |question|}}
+              <button {{action "setCurrentQuestion" question}}>{{question.id}}</button>
+           {{/each}}
+        </div>
+        <br>
+        <div>
+           <p class="question">
+             <b>({{selectedQuestion.id}}) {{selectedQuestion.title}}</b>
+           </p>
+           <ul class="answers">
+           {{#each selectedQuestion.options as |option|}}
+               <input type="radio" name="option.title" value="option" id="option.id" {{action "saveOption" selectedQuestion option}}><label for="option.title"> ({{option.number}}) {{option.title}}</label><br/>
+             {{/each}}
+           </ul>
+        </div>
+      </div>
+      <div class="box-footer overflow-hide">
+          <div class="row">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-primary" {{action 'saveTask' model}} >Finish Quiz</button>
+            </div>
+            <div class="col-md-4">
+              <button type="submit" disabled={{isPrevDisabled}} class="btn btn-primary" {{action 'previousQuestion' selectedQuestion}} >Previous</button>
+            </div>
+            <div class="col-md-4">
+              <button type="submit" disabled={{isNextDisabled}} class="btn btn-primary" {{action 'nextQuestion' selectedQuestion}} >Next</button>
+            </div>
+          </div>
+      </div>
+  </div><!-- /.box-body -->
+</form>
