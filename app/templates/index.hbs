@@ -24,20 +24,19 @@
         <div class="panel-body" >   
         
         {{#if model.searchResults}}
-  <!--/stories-->
-    {{#each model.searchResults as |tutorial|}}
- {{#tutorial-search-result item=tutorial isLoggedIn=isLoggedIn}}
- {{/tutorial-search-result}}
+          <!--/stories-->
+          {{#each model.searchResults as |tutorial|}}
+            {{#tutorial-search-result item=tutorial isLoggedIn=isLoggedIn}}{{/tutorial-search-result}}
           {{/each}}
-     {{/if}}      
- {{#if model.noResults}}         
+        {{/if}}      
+        {{#if model.noResults}}         
            <div class="row index-page">
                 <div class="col-lg-12 message">
-                   No results
+                   Welcome to AllSchool
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-  {{/if}}        
+        {{/if}}        
             <!--/stories-->
             
 <!-- {{#if model.nextLink}}

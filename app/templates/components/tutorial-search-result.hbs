@@ -1,10 +1,10 @@
          <div class="row searchResult" >    
             <br>
             <div class="col-md-12 col-sm-12">
-              <h3>{{item.title}}</h3>
+              <h3>{{item.createdByName}}</h3>
               <div class="row">
                <div class="col-xs-9">
-               <div> <small>{{item.description}}</small></div>
+               <div> <small>{{item.comment}}</small></div>
                 <div class="col-xs-3"></div>
               </div>
                 <div class="col-xs-9">
@@ -39,12 +39,10 @@
                   </h4></div>
                 <div class="col-xs-3"></div>
               </div>
-              {{#if item.showVideo}}
               <div class="row" >
                <div class="col-xs-12">
                <iframe src="{{item.url}}" class="tutorial-iframe-video" frameborder="0" height="315" allowfullscreen></iframe>
                </div>
               </div>
-              {{/if}}
             </div>
           </div>

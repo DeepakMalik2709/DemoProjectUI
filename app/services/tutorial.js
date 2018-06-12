@@ -83,6 +83,13 @@ export default DS.Store.extend({
 		}
 		return this.get(url);
 	},
+	searchTrending(term , nextLink) {
+		var url = "/rest/public/trending/search?q="+ term ;
+		if(nextLink){
+			url = nextLink;
+		}
+		return this.get(url);
+	},
 	fetchMyTutorialList(){
 		return this.get("/rest/secure/tutorial/myList" );
 	},
