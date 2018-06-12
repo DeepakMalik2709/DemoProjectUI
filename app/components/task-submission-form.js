@@ -8,12 +8,12 @@ export default Ember.Component.extend(postMixin , {
 	    this.set("postComment" , "");
 	    this.set("showTaskSubmitOptions" , false);
 	  },
-	
+
     actions: {
     	saveTaskSubmission( ){
     		if(!Ember.get(this, "isSaving") && this.files.length){
     			Ember.set(this, "isSaving", true)
-    			
+
     		let json = {
     			files :  this.files,
     			postId :  this.task.id,
@@ -21,8 +21,11 @@ export default Ember.Component.extend(postMixin , {
     		this.get("taskService").saveTaskSubmission(json).then((result)=>{
     			Ember.set(this, "isSaving", false)
     			if(result.code == 0){
-    				alert("Your submission has been saved");
-    				Ember.set(this.task , "isSubmitted" , true);
+						Ember.set(this.task , "submissions" , [{}]);
+						Ember.set(this.task.submissions[0] , "files" , this.files);
+						this.set("files" , []);
+						Ember.set(this.task , "isSubmitted" , true);
+						alert("Your submission has been saved");
     			}else if(result.message){
     				alert(result.message);
     			}
@@ -30,12 +33,36 @@ export default Ember.Component.extend(postMixin , {
     		}
     	},
 
-    	
+			resubmitTask( ){
+    		if(!Ember.get(this, "isSaving") && this.files.length){
+    			Ember.set(this, "isSaving", true)
+
+					let json = {
+						id: this.task.submissions[0].id,
+	    			files :  this.files,
+	    			postId :  this.task.id,
+	    		}
+
+    		this.get("taskService").resubmitTask(json).then((result)=>{
+    			Ember.set(this, "isSaving", false)
+    			if(result.code == 0){
+						Ember.set(this.task.submissions[0] , "files" , this.files);
+						this.set("files" , []);
+						Ember.set(this.task , "isSubmitted" , true);
+						alert("Your submission has been saved");
+    			}else if(result.message){
+    				alert(result.message);
+    			}
+    		});
+    		}
+    	},
+
+
     	 cancelTaskSubmission(submission){
     		 this.set("files" , []);
     		    this.set("postComment" , "");
         },
-    
+
         removeFile(itemToRemove) {
         	  var items = Ember.get(this, "files");
         	  items.removeObject(itemToRemove);
@@ -63,9 +90,7 @@ export default Ember.Component.extend(postMixin , {
   		    	});
         	}
         },
-        showTaskSubmitOptionsClick(){
-   		 this.set("showTaskSubmitOptions" , true);
-   	},
+
         showFileUpload(){
         	this.$('.file-upload-task').click();
         }

@@ -1,6 +1,6 @@
  <section class="content-header">
     <h1>
-       {{model.name}} - <small>Group</small> 
+       {{model.name}} - <small>Group</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -13,33 +13,24 @@
 <div class="row" style="margin-left:0px; margin-right:0px">
     <div class="col-sm-12">
     	{{#if model.isAdmin}}
-		     <button  {{action 'showJoinRquests' model}} class="btn btn-default" >Join Requests</button>
-		{{/if}}
-    	<div class="btn-group pull-right">
-	        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-	            Options<span class="caret"></span>
-	        </button>
-	        <ul class="dropdown-menu">
-	            <li>
-	            	{{#if model.isAdmin}}
-		               {{#link-to 'group.edit' model.id}}Edit{{/link-to}}
-		            {{/if}}
-				</li>
-	            <li>
-	            	{{#if model.isAdmin}}
-		               <a href="#" data-toggle="modal" {{action 'confirmAndDeleteGroup' model}}>Delete</a>
-		            {{/if}}
-				</li>
-	            <li>
-	            	{{#if model.isAdmin}}
-		               <a href="#" data-toggle="modal" {{action 'showAddMemberModal' model}}>Add Members</a>
-		            {{/if}}
-				</li>
-				<li>
-					<a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>Copy public link</a>
-				</li>
-	        </ul>
-	    </div>
+		     <button {{action 'showJoinRquests' model}} class="btn btn-primary" >
+           <i class="fa fa-user" style="width: 15px; margin: 5px "></i> Requests
+         </button>
+		  {{/if}}
+      {{#if model.isAdmin}}
+          <a href="#" data-toggle="modal" {{action 'showAddMemberModal' model}}>
+            <button class="btn btn-primary">
+              <i class="fa fa-plus" style="width: 15px; margin: 5px "></i> Member
+            </button>
+          </a>
+      {{/if}}
+      {{#if model.isAdmin}}
+          <a href="#" data-toggle="modal" {{action 'confirmAndDeleteGroup' model}}>
+            <button class="btn btn-danger">
+              <i class="fa fa-trash" style="width: 15px; margin: 5px "></i> Delete
+            </button>
+          </a>
+      {{/if}}
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -62,20 +53,20 @@
     </div>
   </div>
   {{/if}}
-  
+
     <div class="form-group" >
     <label for="inputEmail3" class="col-sm-4 control-label">Attendance Allowed</label>
     <div class="col-sm-8">
    <p class="form-control-static"> {{#if model.isGroupAttendaceAllowed}} Yes {{else}} No{{/if}}</p>
     </div>
   </div>
-  
+
 <!--       <div class="form-group" >
     <label for="inputEmail3" class="col-sm-4 control-label">Language</label>
     <div class="col-sm-8">
      <p class="form-control-static"> {{#each model.languagesUI as |lang|}}
                 <span class="file-tag blue" >
-    	{{lang.label}} 
+    	{{lang.label}}
     </span>
     	{{/each}}</p>
     </div>
@@ -83,14 +74,14 @@
 
 </div>
 
-<div class="col-sm-6" > 
+<div class="col-sm-6" >
     <div class="form-group" >
     	<label for="inputEmail3" class="col-sm-4 control-label">Description</label>
     <div class="col-sm-8">
      <p class="form-control-static"> {{model.description}}</p>
     </div>
   	</div>
- 
+
 <!--     <div class="form-group">
     <label for="inputEmail3" class="col-sm-4 control-label">Sharing</label>
     <div class="col-sm-8">
@@ -101,7 +92,7 @@
     <div class="form-group">
     	<label for="inputEmail3" class="col-sm-4 control-label">Tags</label>
     	<div class="col-sm-8">
-     		<p class="form-control-static"> 
+     		<p class="form-control-static">
        			{{#each model.tags as |tag|}}
                 	<span class="file-tag blue" >{{tag.name}}</span>
     			{{/each}}
@@ -109,9 +100,9 @@
     	</div>
   	</div>
   </div>
-   
+
   </form>
- 
+
  {{#if model.isAdmin}}
  <div class="col-sm-12" >
  	<div class= "col-sm-6" style="padding-left: 0px">
@@ -130,8 +121,8 @@
 		                <th>Email</th>
 		                <th>Action</th>
 		            </tr>
-		            
-		            {{#each model.members as |user| }} 
+
+		            {{#each model.members as |user| }}
 		            <tr>
 		                <td>{{user.name}}</td>
 		                <td>{{user.email}}</td>
@@ -145,23 +136,23 @@
 		        </table>
 		    </div><!-- /.box-body -->
 		</div>
-	</div> 
- 
+	</div>
+
 	<div class= "col-sm-6" style="padding-left: 0px">
 	 <div class="box">
 		    <div class="box-header">
 		        <h3 class="box-title">Child Groups</h3>
-		        
+
 		    </div><!-- /.box-header -->
-		    
-		    
+
+
 		    <div class="box-body no-padding" style="max-height: 225px;overflow-y: scroll;">
 		        <table class="table">
 		            <tbody><tr>
 		                <th>Name</th>
 		                <th>Action</th>
 		            </tr>
-		            
+
 		            {{#each model.memberGroups as |memberGroup| }}
 		            <tr>
 		                <td>{{memberGroup.name}}</td>
@@ -175,28 +166,28 @@
 		        </table>
 		    </div><!-- /.box-body -->
 		</div>
-	</div> 
- 
+	</div>
+
  </div>
  {{/if}}
- 
- 
+
+
 <!-- add members to  group Popup-->
 <div class="modal vcenter" id="members-add-modal" tabindex="-1" role="dialog" aria-labelledby="PopUp" data-backdrop="static" >
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
-      <div class="modal-header"> 
+      <div class="modal-header">
       	<a class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-        <h4 class="modal-title" id="myModalLabel"> 
+        <h4 class="modal-title" id="myModalLabel">
         	Add members
       	</h4>
       </div>
       <div class="modal-body">
       	<div class="form-box group-form mtop-15">
           <div class="form-group">
-            <div class="ol-user-list">      
-            <div><label>Add Users</label></div>  
-            {{#each newMembers as |user| }}    	
+            <div class="ol-user-list">
+            <div><label>Add Users</label></div>
+            {{#each newMembers as |user| }}
                 <div class="share-with-email" >
                     <div class="s-list">
                         {{user.email}}
@@ -218,14 +209,14 @@
               	</div>
             </div>
           </div>
-          
+
           <div class="form-box group-form mtop-15">
             <div><label>Add child Groups.</label><br>
-            <small>Tip: All child group members will be automatically added to parent group</small></div>  
+            <small>Tip: All child group members will be automatically added to parent group</small></div>
           <div class="form-group">
-            <div class="ol-user-list">    
+            <div class="ol-user-list">
             	<div class="pos-rel"  >
-            	    {{#each addedGroups as |group| }}    	
+            	    {{#each addedGroups as |group| }}
                 <div class="share-with-email" >
                     <div class="s-list">
                         {{group.label}}
@@ -236,8 +227,8 @@
 									{{select-box prompt='Add' content=myOwnedGroups
 									className='form-control' didChangeAction='addGroup' }}
 								</div>
-				 <small  class="text-info {{if addedGroups.length 'nodisplay' 'inlinedisplay'}}">Tip : You must be admin in another group to add here.</small>				
-								
+				 <small  class="text-info {{if addedGroups.length 'nodisplay' 'inlinedisplay'}}">Tip : You must be admin in another group to add here.</small>
+
             </div>
           </div>
         </div>
@@ -252,32 +243,32 @@
  	</div>
  </div>
 </div>
- 
- 
+
+
 <!-- view members in  group Popup-->
 {{group-item-view-members model=model   updateMember="updateMember" deleteMember="deleteMember" toggleBlockMember="toggleBlockMember" deleteGroupMember="deleteGroupMember" fetchMoreMembers="fetchMoreMembers"}}
 
 <div class="modal vcenter" id="members-request-modal" tabindex="-1" role="dialog" aria-labelledby="PopUp" data-backdrop="static" >
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
-      <div class="modal-header noborder"> 
+      <div class="modal-header noborder">
       	<a class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-        <h4 class="modal-title" id="myModalLabel"> 
+        <h4 class="modal-title" id="myModalLabel">
         	{{model.name}} : Join requests <span class="{{if isLoading 'inlinedisplay' 'nodisplay'}}"><img src="/img/loading.gif" /></span>
       	</h4>
-      	
+
       </div>
       <div class="modal-body">
       	<div class="form-box group-form mtop-15"  >
           <div class="form-group">
-            <div class="ol-user-list"> 
-            {{#each model.joinRequests as |user| }}    	
+            <div class="ol-user-list">
+            {{#each model.joinRequests as |user| }}
                 <div class="user-with-email" >
                     <div class="s-list">
                         {{user.email}}
                          <button type="button" {{action "deleteMember" user}} class="btn btn-sm btn-default mr-5" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
                       <div class="power-select-container pos-rel">
-                       {{#power-select-multiple selected=user.roles  options=roles  
+                       {{#power-select-multiple selected=user.roles  options=roles
 	                        placeholder="Select roles" class="institute-member-role-select pos-rel" tagName=div
   							  onchange=(action (mut user.roles))  as |role| }}
 							  {{role.label}}
@@ -288,15 +279,15 @@
                     </div>
                 </div>
               {{/each}}
-              
+
             </div>
-            
+
             {{#if noJoinRequests}}
             <div>No join requests</div>
             {{/if}}
           </div>
         </div>
-        
+
         <!-- user list end -->
       </div>
  	</div>

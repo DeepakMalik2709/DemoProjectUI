@@ -6,14 +6,23 @@ export default DS.Store.extend(ajaxMixin ,{
 		init() {
 		    this._super(...arguments);
 		  },
-		 
-			 
+
+
 		  saveTaskSubmission: function( json) {
-		 return  new Ember.RSVP.Promise((resolve, reject) =>{
-			 var url = "/rest/secure/task/submission" ;
-			 this.doPost(url , json ).then((data ) =>{
-					  resolve(data);
-			      });
-		 });
-	 },
-});		  
+				 return  new Ember.RSVP.Promise((resolve, reject) =>{
+					 var url = "/rest/secure/task/submission" ;
+					 this.doPost(url , json ).then((data ) =>{
+							  resolve(data);
+					      });
+				 });
+			 },
+
+			 resubmitTask: function( json) {
+ 				 return  new Ember.RSVP.Promise((resolve, reject) =>{
+ 					 var url = "/rest/secure/task/resubmission" ;
+ 					 this.doPost(url , json ).then((data ) =>{
+ 							  resolve(data);
+ 					      });
+ 				 });
+ 			 },
+});

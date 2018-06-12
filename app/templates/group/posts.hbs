@@ -1,70 +1,74 @@
 <section class="content-header">
     <h1>
-       {{model.name}} - <small>Posts</small> 
+       {{model.name}} - <small>Posts</small>
     </h1>
-    
-    
-    
     <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Posts</li>
     </ol>
-    
-    
-    
 </section>
+
 <section class="content">
   <div class="row">
-	    <div class="col-lg-12">
-	    	<div class="btn-group pull-right">
-		        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-		            Options<span class="caret"></span>
-		        </button>
-		        <ul class="dropdown-menu">
-		            <li>
-		            	{{#if model.isGroupAttendaceAllowed}}
-			            	{{#if model.canMarkAttendance}}
-			                   {{#link-to 'group.attendance' model.id}}Attendance{{/link-to}}
-			                {{else}}
-				           		{{#link-to 'attendance.view' model.id}}Attendance{{/link-to}}
-			                {{/if}}
+    <div class="col-lg-8">
+      <div class="btn-group pull-left">
+
+        {{#if model.isAdmin}}
+            {{#link-to 'group.view' model.id}}
+              <button class="btn btn-primary">
+                    <i class="fa fa-info-circle" style="width: 15px; margin: 5px "></i> Info
+              </button>
+            {{/link-to}}
+        {{/if}}
+        <a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>
+          <button class="btn btn-primary">
+            <i class="fa fa-share-square" style="width: 15px; margin: 5px "></i> Link
+          </button>
+        </a>
+        {{#if model.isAdmin}}
+            {{#link-to 'group.edit' model.id}}
+                <button class="btn btn-warning">
+                    <i class="fa fa-edit" style="width: 15px; margin: 5px "></i> Edit
+                </button>
+            {{/link-to}}
+        {{/if}}
+      </div>
+    </div>
+    <div class="col-lg-4">
+    	<div class="btn-group pull-right">
+	        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+	            More..<span class="caret"></span>
+	        </button>
+	        <ul class="dropdown-menu">
+	            <li>
+	            	{{#if model.isGroupAttendaceAllowed}}
+		            	{{#if model.canMarkAttendance}}
+		                   {{#link-to 'group.attendance' model.id}}Attendance{{/link-to}}
+		                {{else}}
+			           		{{#link-to 'attendance.view' model.id}}Attendance{{/link-to}}
 		                {{/if}}
-		            </li>
-		            <li>
-		            	{{#if model.isAdmin}}
-			               {{#link-to 'group.edit' model.id}}Edit Group{{/link-to}}
-			            {{/if}}
-					</li>
-		            <li>
-		            	{{#if model.isAdmin}}
-			               {{#link-to 'group.task.create'}}Create Task{{/link-to}}
-			            {{/if}}
-					</li>
-		            <li>
-		            	{{#if model.isAdmin}}
-			               {{#link-to 'group.view' model.id}}Group Details{{/link-to}}
-			            {{/if}}
-					</li>
-					<li>
-						<a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>Copy public link</a>
-					</li>
-		        </ul>
-		    </div>
+	                {{/if}}
+	            </li>
+	            <li>
+	            	{{#if model.isAdmin}}
+		               {{#link-to 'group.task.create'}}Create Task{{/link-to}}
+		            {{/if}}
+				      </li>
+	        </ul>
 	    </div>
+    </div>
 	    <!-- /.col-lg-12 -->
 	</div>
             <!-- /.row -->
-
-    <div class="row">
-  
+  <br>
+  <div class="row">
 	  <div class="col-md-8 {{if showCreatePost 'inlinedisplay' 'nodisplay' }}" style="margin-left:5px">
 	    {{post-item-form item=newPost buttonLabel='Save Post' savePost="savePost" cancelClicked="cancelCreatePost" controllerRef=controllerRef}}
 	  </div>
-  
-    </div>
-    
-    
-   
+  </div>
+
+
+
 <hr/>
  <div class="row">
 {{#each posts as |post|}}
@@ -76,7 +80,7 @@
 {{else if post.isSchedule}}
 	{{schedule-item item=post updatePost="savePost" deletePost="deletePost"  }}
 {{/if}}
-</div>   
+</div>
 {{/each}}
 
 {{#if noRecords}}
@@ -87,5 +91,5 @@
  </div>
  {{/if}}
 
-</div>     
-</section>       
+</div>
+</section>
