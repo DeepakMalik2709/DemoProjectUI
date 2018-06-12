@@ -52,7 +52,7 @@ export default Ember.Route.extend(tutorialMixin,scrollMixin,{
         if (!thisSearch.isLoading) {
         	this.controller.set("model.isLoading", true);
         	 this.controller.set("model.noBoxShadow" , true);
-            this.tutorialService.searchTutorial(thisSearch.searchTerm, thisSearch.nextLink).then((result) => {
+            this.tutorialService.searchTrending(thisSearch.searchTerm, thisSearch.nextLink).then((result) => {
             	this.controller.set("model.isLoading", false);
                 if (result.code == 0) {
                     thisSearch.searchResults.pushObjects(result.items);
@@ -90,8 +90,8 @@ export default Ember.Route.extend(tutorialMixin,scrollMixin,{
                        this.cleanupNewResults(result.items);
                        this.cleanupAllTutorials( thisSearch.searchResults);
                        this.controller.set("model.title", "Trending");
-                       this.controller.set("model.noBoxShadow" , thisSearch.searchResults.length <1);
-                       this.controller.set("model.noResults", thisSearch.searchResults.length <1);
+                       this.controller.set("model.noBoxShadow" , thisSearch.searchResults.length < 1);
+                       this.controller.set("model.noResults", thisSearch.searchResults.length < 1);
                    }
                });
            }

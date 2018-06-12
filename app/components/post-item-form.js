@@ -5,8 +5,8 @@ export default Ember.Component.extend({
 	postService: Ember.inject.service('post'),
 	useGoogleDrive : false,
 	 init() {
-		    this._super(...arguments);
-		    this.useGoogleDrive = Ember.get(this.get("contextService").fetchContext().get("loginUser"), "useGoogleDrive");
+			this._super(...arguments);
+			this.useGoogleDrive = Ember.get(this.get("contextService").fetchContext().get("loginUser"), "useGoogleDrive");
 		    this.set("controllerRef" , this.controllerRef);
 		  },
     actions: {

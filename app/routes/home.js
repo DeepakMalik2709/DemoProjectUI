@@ -23,7 +23,8 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin ,notificationM
         this.controller.set("isLoggedIn", this.controllerFor("application").get("isLoggedIn"));
         this.controller.set("posts", this.posts);
         this.controller.set('controllerRef', this)
-         this.controller.set("noRecords", false);
+		this.controller.set("noRecords", false);
+		this.initCreatePost();
         this.fetchMyHomePosts();
         this.bindScrolling();
         this.listenComments();
@@ -65,7 +66,7 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin ,notificationM
     	this.fetchMyHomePosts();
       },
     actions: {
-    	savePost(post){
+    	updatePost(post){
     		if(!Ember.get(this, "isSaving") && post.comment){
     			Ember.set(this, "isSaving", true);
     			Ember.set(post, "isSaving", true);
@@ -86,7 +87,44 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin ,notificationM
     			}
     		});
     		}
-    	},
+		},
+		savePost(post) {
+			if(!Ember.get(this, "isSaving") && post.comment){
+    			Ember.set(this, "isSaving", true);
+    			Ember.set(post, "isSaving", true);
+    			Ember.set(post, "showLoading", true);
+    			this.controller.set("noRecords", false);
+	    		post.save().then((resp1) => {
+	    			Ember.set(this, "isSaving", false);
+	    			Ember.set(post, "isSaving", false);
+	    			Ember.set(post, "showLoading", false);
+	    			var posts = this.controller.get("posts");
+	    			var index = posts.indexOf(post);
+	    			if(index > -1){
+	    				resp1.set('isEditing' , false)
+	    				posts.replace(index, 1, resp1);
+	    			}else{
+	    				this.initCreatePost();
+	    				Ember.run.later(()=>{this.component.resetCommentBox();} , 10)
+	    				posts.unshiftObject(resp1);
+	    			}
+	    		});
+    		}
+		},
+		cancelCreatePost(){
+			if (this.controller.get("newPost.comment")) {
+				 let confirmation = confirm("Cancel post ?");
+				  if (confirmation) {
+							this.initCreatePost();
+						  this.component.resetCommentBox();
+						  Ember.set(this, "isSaving", false);
+				  }
+			}else{
+					this.initCreatePost();
+				  this.component.resetCommentBox();
+				  Ember.set(this, "isSaving", false);
+			}
+	  	},
     	deletePost(post){
             let confirmation = confirm("Are you sure you want to delete post ?");
 
@@ -94,7 +132,7 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin ,notificationM
             	var posts = this.controller.get("posts");
     			var index = posts.indexOf(post);
     			posts.removeAt(index);
-    			this.get("postService").deletePost(post.get("groupId"), post.get("id")).then((result)=>{
+    			this.get("postService").deletePost(post.get("id")).then((result)=>{
             		if(result.code == 0){
     	    		}
     	    	});

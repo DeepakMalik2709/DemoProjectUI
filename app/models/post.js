@@ -11,7 +11,8 @@ export default DS.Model.extend({
 	  createdByName: DS.attr('string'),
 	  updatedByEmail: DS.attr('string'),
 	  postType:DS.attr('string'),
-	  postPriv:DS.attr('string'),
+		postPriv:DS.attr('string'),
+		postCategory: DS.attr('string'),
 	  eventId:DS.attr('string'),
 	  reponseYes: DS.attr('number'),
 	  reponseNo: DS.attr('number'),
@@ -61,7 +62,7 @@ export default DS.Model.extend({
 	tags: DS.attr( {
 		    defaultValue() { return []; }
 	  }),
-	  newTag: "",
+	  newTag: DS.attr('string'),
 	  isValid: Ember.computed('comment', 'isSaving', function() {
 		  if(this.get('isSaving')){
 			  return false;
@@ -73,5 +74,7 @@ export default DS.Model.extend({
 			  return true;
 		  }
 		    return false;
-	  }),
+		}),
+		
+		isPrivatePost: Ember.computed.equal('postCategory', 'PRIVATE')
 });
