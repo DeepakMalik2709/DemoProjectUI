@@ -9,7 +9,7 @@
                             </div>
                             <p class="{{unless item.isEditing 'show' 'hide'}}">{{{item.comment}}}</p>
                 <p class="{{if item.isEditing 'show' 'hide'}}">{{post-comment-box  className="edit-comment"  save="updateComment" esc-key='cancelEditing'  value=item.comment autoCompleteList=myList disabled=item.isSaving}}</p>
-              
+
                                  <footer class="comment__footer"><menu class="comment-footer__menu">
 										{{#if canEdit}}
 								<li class="reply {{unless item.isEditing 'show' 'hide'}}" {{action "editComment"}} data-role="reply-link"><a href="javascript:void(0);"
@@ -28,19 +28,19 @@
 							</menu>
 									</footer>
                         </div>
-                   
-                        
-                        
+
+
+
                         <ul class="comments-list">
                           {{#each item.comments as |subComment|}}
 			              {{post-item-comment-reply item=subComment update="updateCommentReply" deleteCommentReply="deleteCommentReply" group=group}}
 			                {{/each}}
 			                <div class="post-footer">
-                <div class="input-group contenteditable-input-group"> 
-                    
+                <div class="input-group contenteditable-input-group">
+
                     {{post-comment-box className="" placeholder="Add a reply"  save='saveSubComment'  recipientList=recipientList value=postComment autoCompleteList=myList disabled=isSaving}}
                 </div>
                 </div>
-           
+
                         </ul>
                     </li>
