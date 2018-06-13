@@ -1,12 +1,12 @@
   <div class="col-md-12 col-sm-12 col-lg-12">
-        <div class="panel panel-white post panel-shadow">
+        <div class="panel panel-white post panel-shadow" style="overflow-y: auto; max-height: 400px;">
             <div class="post-heading col-md-12 col-sm-12 col-lg-12">
                 <div class="col-md-1 col-sm-1 col-lg-1">
                     <img src="{{item.photoUrl}}" class="img-circle avatar" alt="user profile image">
                 </div>
                 <div class="col-md-9 col-sm-9 col-lg-9">
                 	<div class="row">
-	                    <div class="title h5 col-md-8 col-sm-8 col-lg-8"> 
+	                    <div class="title h5 col-md-8 col-sm-8 col-lg-8">
 	                        <a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>
 	                       posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
 	                    </div>
@@ -34,11 +34,11 @@
 						</footer>
 					</div>
 					<div class="row">
-					  	<div class="col-md-8 col-sm-8 col-lg-8"> 
+					  	<div class="col-md-8 col-sm-8 col-lg-8">
 			                <div class="{{unless item.isEditing 'show' 'hide'}}">{{{item.comment}}}</div>
 			                <div class="{{if item.isEditing 'show' 'hide'}}">{{post-comment-box  className="post-description edit-post"   save='updatePost' esc-key='cancelEditing'  value=item.comment autoCompleteList=myList disabled=item.isSaving}}</div>
 			                <div class="col-sm-12" class="{{if item.files.length 'show' 'hide' }} attachment-view" style="">
-						     {{post-item-files-list-preview item=item  }} 
+						     {{post-item-files-list-preview item=item  }}
 <!-- 							 <ol class="file-list" style="padding-left:0px">
 						        {{#each item.files as |file|}}
 						        <li class="pos-rel" style="margin: 1px;height: 25px">
@@ -55,17 +55,17 @@
 			       	 	</div>
 					</div>
                 </div>
-         </div> 
+         </div>
        <div class="post-footer {{if item.isEditing 'hideBorder' ''}}">
-              <div class="input-group contenteditable-input-group" > 
+              <div class="input-group contenteditable-input-group" >
                     {{post-comment-box className="" placeholder="Add a comment"  save='saveComment'  recipientList=recipientList value=postComment autoCompleteList=myList disabled=isSaving}}
                 </div>
-                <ul class="comments-list" style="padding-left: 1%;">                
+                <ul class="comments-list" style="padding-left: 1%;">
                 {{#each item.comments as |comment|}}
               {{post-item-comment item=comment update="updateComment" deleteComment="deleteComment" group=group}}
                 {{/each}}
                 </ul>
-         </div> 
-        
-     </div> 
+         </div>
+
+     </div>
     </div>
