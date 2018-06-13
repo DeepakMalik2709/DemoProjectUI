@@ -11,18 +11,18 @@
 <section class="content">
   <div class="row">
     <div class="col-lg-8">
-      <div class="btn-group pull-left">
+      <div class="btn-group">
 
         {{#if model.isAdmin}}
             {{#link-to 'group.view' model.id}}
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" data-toggle="tooltip" title="Group Information!">
                     <i class="fa fa-info-circle" style="width: 15px; margin: 5px "></i> Info
               </button>
             {{/link-to}}
         {{/if}}
         <a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>
           <button class="btn btn-primary">
-            <i class="fa fa-share-square" style="width: 15px; margin: 5px "></i> Link
+            <i class="fa fa-share-square" style="width: 15px; margin: 5px "></i> Invite
           </button>
         </a>
         {{#if model.isAdmin}}
@@ -32,29 +32,27 @@
                 </button>
             {{/link-to}}
         {{/if}}
+        <div style="display : inline">
+            <button type="button" class="btn btn-primary" data-toggle="dropdown">
+                <i class="fa fa-chevron-circle-down" style="width: 15px; margin: 5px "></i> More..
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                	{{#if model.isGroupAttendaceAllowed}}
+    	            	{{#if model.canMarkAttendance}}
+    	                   {{#link-to 'group.attendance' model.id}}Attendance{{/link-to}}
+    	                {{else}}
+    		           		{{#link-to 'attendance.view' model.id}}Attendance{{/link-to}}
+    	                {{/if}}
+                    {{/if}}
+                </li>
+                <li>
+                	{{#if model.isAdmin}}
+    	               {{#link-to 'group.task.create'}}Create Task{{/link-to}}
+    	            {{/if}}
+    			      </li>
+            </ul>
       </div>
-    </div>
-    <div class="col-lg-4">
-    	<div class="btn-group pull-right">
-	        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	            More..<span class="caret"></span>
-	        </button>
-	        <ul class="dropdown-menu">
-	            <li>
-	            	{{#if model.isGroupAttendaceAllowed}}
-		            	{{#if model.canMarkAttendance}}
-		                   {{#link-to 'group.attendance' model.id}}Attendance{{/link-to}}
-		                {{else}}
-			           		{{#link-to 'attendance.view' model.id}}Attendance{{/link-to}}
-		                {{/if}}
-	                {{/if}}
-	            </li>
-	            <li>
-	            	{{#if model.isAdmin}}
-		               {{#link-to 'group.task.create'}}Create Task{{/link-to}}
-		            {{/if}}
-				      </li>
-	        </ul>
 	    </div>
     </div>
 	    <!-- /.col-lg-12 -->
