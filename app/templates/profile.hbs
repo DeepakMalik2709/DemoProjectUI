@@ -16,7 +16,7 @@
                           </button>
                           {{#if model.hasUploadedPhoto}}
                               <button type="button" {{action 'removePhoto' model}} class="btn btn-default" style="width: 47px;" disabled={{if isSaving true}}>
-                                  <i class="fa fa-trash"></i>
+                                  <i class="fa fa-trash text-danger"></i>
                               </button>
                           {{/if}}
                           <input accept="image/*"  id="photo-upload" onchange={{action "uploadPhoto"}} type="file" style="width: 0px; height: 0px; overflow: hidden;">
@@ -174,7 +174,7 @@
 
             <div class="panel-section-right pull-right">
                 <i class="fa fa-pencil panel-section-edit" data-target="#certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
-                <i class="fa fa-trash panel-section-delete" data-target="#delete-certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
+                <i class="fa fa-trash text-danger panel-section-delete" data-target="#delete-certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
             </div>
             </div>
         {{/each}}

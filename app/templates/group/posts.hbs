@@ -15,20 +15,20 @@
 
         {{#if model.isAdmin}}
             {{#link-to 'group.view' model.id}}
-              <button class="btn btn-primary">
-                    <i class="fa fa-info-circle" style="width: 15px; margin: 5px "></i> Info
+              <button class="btn btn-default">
+                    <i class="fa fa-info-circle text-primary" style="width: 15px; margin: 5px "></i> Info
               </button>
             {{/link-to}}
         {{/if}}
         <a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>
-          <button class="btn btn-primary">
-            <i class="fa fa-share-square" style="width: 15px; margin: 5px "></i> Link
+          <button class="btn btn-default">
+            <i class="fa fa-share-square text-primary" style="width: 15px; margin: 5px "></i> Link
           </button>
         </a>
         {{#if model.isAdmin}}
             {{#link-to 'group.edit' model.id}}
-                <button class="btn btn-warning">
-                    <i class="fa fa-edit" style="width: 15px; margin: 5px "></i> Edit
+                <button class="btn btn-default">
+                    <i class="fa fa-edit text-warning" style="width: 15px; margin: 5px "></i> Edit
                 </button>
             {{/link-to}}
         {{/if}}
