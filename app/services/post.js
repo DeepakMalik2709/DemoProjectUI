@@ -32,9 +32,9 @@ export default DS.Store.extend(ajaxMixin ,{
 		 });
 	 },
 	 
-	 deletePost: function(groupId, postId) {
+	 deletePost: function(postId) {
 		 return  new Ember.RSVP.Promise((resolve, reject) =>{
-				var url = "/rest/secure/group/" + groupId + "/post/" + postId;
+				var url = "/rest/secure/group/post/" + postId;
 				this.doDelete(url  ).then((data ) =>{
 					  resolve(data);
 			      });

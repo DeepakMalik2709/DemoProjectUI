@@ -8,7 +8,9 @@
                 	<div class="row">
 	                    <div class="title h5 col-md-8 col-sm-8 col-lg-8">
 	                        <a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>
-	                       posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
+	                       {{#if item.isPrivatePost}}
+						   posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
+						   {{/if}}
 	                    </div>
 	                   <div class="title h5 col-md-3 col-sm-3 col-lg-3 pull-right text-muted time"> {{item.createdDisplayTime}}</div>
                    </div>
@@ -33,10 +35,14 @@
 							</menu>
 						</footer>
 					</div>
+					
 					<div class="row">
 					  	<div class="col-md-8 col-sm-8 col-lg-8">
 			                <div class="{{unless item.isEditing 'show' 'hide'}}">{{{item.comment}}}</div>
-			                <div class="{{if item.isEditing 'show' 'hide'}}">{{post-comment-box  className="post-description edit-post"   save='updatePost' esc-key='cancelEditing'  value=item.comment autoCompleteList=myList disabled=item.isSaving}}</div>
+			                <div class="{{if item.isEditing 'show' 'hide'}}">
+								{{post-comment-box  className="post-description edit-post" save='updatePost' esc-key='cancelEditing'  value=item.comment autoCompleteList=myList disabled=item.isSaving}}
+								{{input type="text" class="col-md-8 col-sm-8 col-lg-8 form-control" value=item.newTag placeholder="Tags"}}
+							</div>
 			                <div class="col-sm-12" class="{{if item.files.length 'show' 'hide' }} attachment-view" style="">
 						     {{post-item-files-list-preview item=item  }}
 <!-- 							 <ol class="file-list" style="padding-left:0px">
@@ -47,13 +53,21 @@
 						        {{/each}}
 						        </ol> -->
 			       			</div>
-			                <div   class="stats {{unless item.isEditing 'show' 'hide'}}">
+			                <div class="stats {{unless item.isEditing 'show' 'hide'}}">
 			                    <a href="javascript:void(0);" class="btn btn-default stat-item" disabled={{disableReactButton}} {{action "reactToPost"}}>
 			                        <i class="fa fa-thumbs-up icon"></i>{{item.numberOfReactions}}
 			                    </a>
 			           	 	</div>
 			       	 	</div>
 					</div>
+
+					<h4 class="{{unless item.isEditing 'show' 'hide'}} row post-tags">
+						{{#each item.tags as |tag|}}
+							<span class="post-tag label label-default">
+								{{tag.name}}
+							</span>   
+						{{/each}}
+					</h4>
                 </div>
          </div>
        <div class="post-footer {{if item.isEditing 'hideBorder' ''}}">

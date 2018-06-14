@@ -5,37 +5,62 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-
+      
     </ol>
 </section>
-
-
 <section class="content" style="padding:0px">
-  <div class="row">
+    <!-- /.row -->
+	<!--<div class="row">
+		<div class="col-md-8" style="margin-left:5px">
+			{{post-item-form item=newPost buttonLabel='Save Post' savePost="savePost" cancelClicked="cancelCreatePost" controllerRef=controllerRef}}
+		</div>
+	</div>
+	-->
 
-      {{#each posts as |post|}}
-        	 <div class="col-md-12 col-lg-12  col-sm-12">
-        		{{#if post.isTask}}
-        			{{task-item item=post editTask="editTask" deletePost="deletePost"   }}
-        		{{else if post.isPost}}
-        			{{post-item item=post updatePost="savePost" deletePost="deletePost"   }}
-        		{{else if post.isSchedule}}
-        			{{schedule-item item=post updatePost="savePost" deletePost="deletePost"  }}
-        		{{/if}}
-        	</div>
-      {{/each}}
+	<div class="row">
+		{{#each posts as |post|}}
+			<div class="col-md-12 col-lg-12  col-sm-12">
+				{{#if post.isTask}}
+					{{task-item item=post editTask="editTask" deletePost="deletePost"   }}
+				{{else if post.isPost}}
+					{{post-item item=post updatePost="updatePost" deletePost="deletePost"   }}
+				{{else if post.isSchedule}}
+					{{schedule-item item=post updatePost="updatePost" deletePost="deletePost"  }}
+				{{/if}}
+			</div>   
+		{{/each}}
 
-      {{#if noRecords}}
-          <div class="error-page">
-              <h2 class="headline text-info"> Hi..</h2>
-              <div class="error-content">
-                  <h3><i class="fa fa-smile-o text-green"></i> Welcome to AllSchool.</h3>
-                  <p>
-                      Now its even easier to manage your academic-schedules and files with AllSchool. Go and start a
-                      discussion or share your study material among your peer groups.
-                  </p>
-              </div>
-          </div>
-  {{/if}}
-  </div>
-</section>
+		{{#if noRecords}}
+			<div class="row">
+				<!-- left column -->
+				<div class="col-md-3 col-lg-3">
+				</div>
+				<div class="col-md-6 col-lg-6">        
+					<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-bar-chart-o fa-fw"></i> Posts
+						
+							</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-12">
+										<p>
+									There are no posts. Try posting in a group.
+										</p>
+									</div>
+									<!-- /.col-lg-4 (nested) -->
+									<div class="col-lg-8">
+										<div id="morris-bar-chart"></div>
+									</div>
+									<!-- /.col-lg-8 (nested) -->
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+				</div>
+			</div>
+		{{/if}}
+	</div>      
+</section>      

@@ -1,0 +1,12 @@
+.post-tags {
+
+    padding: 0 15px;
+
+    .post-tag {
+        margin-left: 5px;
+    
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
