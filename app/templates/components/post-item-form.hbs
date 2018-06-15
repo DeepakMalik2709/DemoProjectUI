@@ -4,8 +4,8 @@
             {{post-comment-box controllerRef=controllerRef className="post-description" placeholder="Share your thoughts." recipientList=item.recipients value=item.comment autoCompleteList=myList disabled=item.isSaving}}
             <small class="text-info pull-right">Tip : Use @ to tag people. Eg, type "@abc@gmail.com" + Enter</small>
             
-            {{input type="text" class="col-md-8 col-sm-8 col-lg-8 form-control" value=item.newTag placeholder="Tags"}}
-            <small class="text-info pull-right">Please enter comma separated tag name.</small>
+            {{input type="text" class="col-md-8 col-sm-8 col-lg-8 form-control" value=item.newTag placeholder="HashTags"}}
+            <small class="text-info pull-right">Please enter space separated hashtags name.</small>
         </div>
         <div class="col-sm-12" class="{{if item.files.length 'show' 'hide' }}">
         <ol >
