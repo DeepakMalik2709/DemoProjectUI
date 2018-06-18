@@ -13,21 +13,21 @@
 <div class="row" style="margin-left:0px; margin-right:0px">
     <div class="col-sm-12">
     	{{#if model.isAdmin}}
-		     <button {{action 'showJoinRquests' model}} class="btn btn-primary" >
-           <i class="fa fa-user" style="width: 15px; margin: 5px "></i> Requests
+		     <button {{action 'showJoinRquests' model}} class="btn btn-default" >
+           <i class="fa fa-user text-primary" style="width: 15px; margin: 5px "></i> Requests
          </button>
 		  {{/if}}
       {{#if model.isAdmin}}
           <a href="#" data-toggle="modal" {{action 'showAddMemberModal' model}}>
-            <button class="btn btn-primary">
-              <i class="fa fa-plus" style="width: 15px; margin: 5px "></i> Member
+            <button class="btn btn-default">
+              <i class="fa fa-plus text-primary" style="width: 15px; margin: 5px "></i> Show
             </button>
           </a>
       {{/if}}
       {{#if model.isAdmin}}
           <a href="#" data-toggle="modal" {{action 'confirmAndDeleteGroup' model}}>
-            <button class="btn btn-danger">
-              <i class="fa fa-trash" style="width: 15px; margin: 5px "></i> Delete
+            <button class="btn btn-default">
+              <i class="fa fa-trash text-dangers" style="width: 15px; margin: 5px "></i> Delete
             </button>
           </a>
       {{/if}}
@@ -110,7 +110,7 @@
 		    <div class="box-header">
 		        <h3 class="box-title">Groups Members</h3>
 		        <div class="box-tools">
-                    <button  {{action 'showMembers' model}} class="btn btn-default pull-right" >Members</button>
+                    <button  {{action 'showMembers' model}} class="btn btn-default pull-right" >Show</button>
                 </div>
 		    </div><!-- /.box-header -->
 		    <div class="box-body no-padding group-view-member-list" style="max-height: 225px;overflow-y: scroll;">
@@ -127,8 +127,8 @@
 		                <td>{{user.name}}</td>
 		                <td>{{user.email}}</td>
 		                <td>
-		                	 <button type="button" {{action "deleteMember" user}} class="btn btn-sm btn-default mr-5" ><i class="fa fa-trash" aria-hidden="true"></i></button>
-	                         <button type="button" {{action "toggleBlockMember" user}} class="btn btn-sm btn-default mr-5  {{if user.isBlocked 'black-border-1px' ''}}" ><i class="fa fa-ban {{if user.isBlocked 'text-danger'}}" aria-hidden="true"></i></button>
+		                	 <button type="button" {{action "deleteMember" user}} class="btn btn-sm btn-default mr-5" ><i class="fa fa-trash text-danger" aria-hidden="true"></i></button>
+	                         <button type="button" {{action "toggleBlockMember" user}} class="btn btn-sm btn-default mr-5  {{if user.isBlocked 'black-border-1px' ''}}" ><i class="fa fa-ban text-warning {{if user.isBlocked 'text-danger'}}" aria-hidden="true"></i></button>
 		                </td>
 		            </tr>
 		            {{/each}}
@@ -157,7 +157,7 @@
 		            <tr>
 		                <td>{{memberGroup.name}}</td>
 		                <td>
-		                	<button type="button" {{action "deleteGroupMember" memberGroup}} class="btn btn-sm btn-default mr-5" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+		                	<button type="button" {{action "deleteGroupMember" memberGroup}} class="btn btn-sm btn-default mr-5" ><i class="fa fa-trash text-danger" aria-hidden="true"></i></button>
                    	 		<span class="{{if user.isLoading 'inlinedisplay' 'nodisplay'}}"><img src="/img/loading.gif" /></span>
 		                </td>
 		            </tr>

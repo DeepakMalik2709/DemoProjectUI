@@ -17,7 +17,7 @@
                           </button>
                           {{#if model.hasUploadedPhoto}}
                               <button type="button" {{action 'removePhoto' model}} class="btn btn-default" style="width: 47px;" disabled={{if isSaving true}}>
-                                  <i class="fa fa-trash"></i>
+                                  <i class="fa fa-trash text-danger"></i>
                               </button>
                           {{/if}}
                           <input accept="image/*"  id="photo-upload" onchange={{action "uploadPhoto"}} type="file" style="width: 0px; height: 0px; overflow: hidden;">

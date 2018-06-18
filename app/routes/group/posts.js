@@ -41,7 +41,7 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin,notificationMi
     willDestroy : function(){
     	this.unbindScrolling();
     	this.unlistenComments();
-    	
+
     },
     initCreateTab : function(){
     	this.controller.set("showCreatePost", false);
@@ -52,7 +52,7 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin,notificationMi
     	var group = this.controller.get("model");
     	 const newPost = this.store.createRecord('post', {
     		 groupId: group.id,
-	      }); 
+	      });
     	  this.controller.set("newPost", newPost);
     },
     fetchGroupPosts : function(){
@@ -149,7 +149,8 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin,notificationMi
         	if(this.useGoogleDrive){
         		this.initCreateTask();
         	}else{
-        		if(confirm("AllSchool needs access to Google Drive and Calendar to create Tasks. Would you like to grant permission now ?")){
+        		if(confirm("We need permission to manage your personalised library in Google Drive and Calendar to manage your time-table. Would you like to grant permission now ?"+
+						"\n \n Note: We are only allowed to access a folder named AllSchool. It will be created by the application automatically")){
         			window.location.href= "/a/oauth/googleAllAuthorization";
         		}
         	}
@@ -161,7 +162,8 @@ export default Ember.Route.extend(scrollMixin,authenticationMixin,notificationMi
 	    	let model = this.controller.get('model');
 	    	var context = this.contextService.fetchContext((result)=>{
 	    		copyToClipboard(result.url + "/group/" + model.id)
-	    		alert("Public link copied to clipboard");
+	    		alert("Public link copied to clipboard."+
+					"\n Now you can share it with your peers to invite them");
 	    	});
 	    },
     }
