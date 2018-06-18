@@ -15,6 +15,8 @@ export default DS.Model.extend({
 	phoneNumber: DS.attr('number'),
 	about: DS.attr('string'),
 
+	hasEditAccess: DS.attr('boolean'),
+
 	password: DS.attr('string'),
 	password2: DS.attr('string'),
 	useGoogleDrive : DS.attr('boolean'),

@@ -36,6 +36,15 @@ export default DS.Store.extend(ajaxMixin ,{
 		 });
 	        
 	 },
+	getProfile: function(profileId) {
+		var url = "/rest/secure/profile/"+profileId;
+		return  new Ember.RSVP.Promise((resolve, reject) =>{
+			this.doGet(url).then((data ) =>{
+				resolve(data);
+			});
+		});
+		   
+	},
 	 deauthorizeGoogleDrive : function(){
 		 return  new Ember.RSVP.Promise((resolve, reject) =>{
 				var url = "/rest/secure/profile/deauthorizeGoogleDrive";

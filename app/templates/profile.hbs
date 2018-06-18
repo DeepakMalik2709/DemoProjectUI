@@ -10,6 +10,7 @@
                           <img src="{{model.photoUrl}}" style="width: 100px;" class="avatar" />
                           <span class="{{if isSaving 'inlinedisplay' 'nodisplay' }}"><img src="/img/loading.gif" /></span>
                         </div>
+                        {{#if model.haveEditAccess}}
                         <div>
                           <button type="button" onclick="$('#photo-upload').click();" class="btn btn-default" style="width: 47px;" disabled={{if isSaving true}}>
                               <i class="fa fa-pencil"></i>
@@ -21,7 +22,7 @@
                           {{/if}}
                           <input accept="image/*"  id="photo-upload" onchange={{action "uploadPhoto"}} type="file" style="width: 0px; height: 0px; overflow: hidden;">
                         </div>
-
+                        {{/if}}
                     </div>
                     <div class="profile-info-wrapper">
                         <label class="profile-name">{{model.firstName}} {{model.lastName}}</label>
@@ -30,9 +31,11 @@
                         <label class="profile-currentCity">{{model.currentCity}}</label>
                     </div>
                 </div>
+                {{#if model.haveEditAccess}}
                 <div class="panel-section-right pull-right" data-target="#profile-info" data-toggle="modal">
                     <i class="fa fa-pencil panel-section-edit"></i>
                 </div>
+                {{/if}}
             </div>
             <div class="panel-section">
                 <div class="profile-about">
@@ -44,6 +47,7 @@
 
     {{modal/profile/profile-info-modal item=model update="updateProfileInfo"}}
 
+    {{#if model.haveEditAccess}}
     <!-- Google Permission -->
     <div class="panel panel-primary panel-sections personal-info">
         <div class="panel-heading">
@@ -80,6 +84,7 @@
             </div>
         </div>
     </div>
+    {{/if}}
 
     <!-- Add Institute -->
     <div class="panel panel-primary panel-sections personal-info">
@@ -92,9 +97,11 @@
                 <!-- Add Institute-->
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Institutes</label>
+                    {{#if model.haveEditAccess}}
                     <div class="col-sm-10">
                       <button type="submit" class="btn btn-default" {{action 'addInstituteBtnClick' }}  disabled={{if isSaving true}}>Add</button>
                     </div>
+                    {{/if}}
                     <div class="col-sm-10 col-sm-offset-2">
                         {{#each model.institutes as |institute|}}
                             <div >
@@ -147,73 +154,81 @@
 
     <div class="panel panel-primary panel-sections certifications">
         <div class="panel-heading">
-        <h2>Certifications</h2>
-        <button type="button" class="btn btn-default" data-target="#certificate-0" data-toggle="modal">Add</button>
+            <h2>Certifications</h2>
+            {{#if model.haveEditAccess}}
+            <button type="button" class="btn btn-default" data-target="#certificate-0" data-toggle="modal">Add</button>
+            {{/if}}
         </div>
         <div class="panel-body">
         {{#each model.certificates as |certificate index|}}
             <div class="certificate panel-section">
-            <div class="panel-section-left pull-left">
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2 col-xs-6">Name</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.name}}</label>
+                <div class="panel-section-left pull-left">
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2 col-xs-6">Name</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.name}}</label>
+                    </div>
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2 col-xs-6">Certification Date</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.date}}</label>
+                    </div>
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2">Organisation</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.organisation}}</label>
+                    </div>
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2">Grade</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.grade}}</label>
+                    </div>
                 </div>
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2 col-xs-6">Certification Date</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.date}}</label>
-                </div>
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2">Organisation</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.organisation}}</label>
-                </div>
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2">Grade</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{certificate.grade}}</label>
-                </div>
-            </div>
 
-            <div class="panel-section-right pull-right">
-                <i class="fa fa-pencil panel-section-edit" data-target="#certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
-                <i class="fa fa-trash panel-section-delete" data-target="#delete-certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
-            </div>
+                {{#if model.haveEditAccess}}
+                <div class="panel-section-right pull-right">
+                    <i class="fa fa-pencil panel-section-edit" data-target="#certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
+                    <i class="fa fa-trash panel-section-delete" data-target="#delete-certificate-{{certificate.certificateId}}" data-toggle="modal"></i>
+                </div>
+                {{/if}}
             </div>
         {{/each}}
         </div>
     </div>
 
+    {{#if model.haveEditAccess}}
     {{modal/profile/certificate-modal appUserId=model.id update="saveCertificate"}}
-
+    
     {{#each model.certificates as |certificate index|}}
         {{modal/profile/certificate-modal appUserId=model.id item=certificate update="updateCertificate"}}
         {{modal/core/delete-modal item=index modalId=(concat "delete-certificate-" certificate.certificateId) delete="deleteCertificate"}}
     {{/each}}
+    {{/if}}
 
     <div class="panel panel-primary panel-sections personal-info">
         <div class="panel-heading">
             <h2>Personal Information</h2>
+            {{#if model.haveEditAccess}}
             <div class="panel-section-right pull-right" data-target="#personal-info" data-toggle="modal">
                 <i class="fa fa-pencil panel-section-edit"></i>
             </div>
+            {{/if}}
         </div>
         <div class="panel-body">
             <div class="panel-section">
-            <div class="panel-section-left pull-left">
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2">DOB</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{model.dob}}</label>
+                <div class="panel-section-left pull-left">
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2">DOB</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{model.dob}}</label>
+                    </div>
+                    <div class="form-group has-feedback">
+                    <label class="control-label col-sm-2">Hometown</label>
+                    <label class="col-sm-10 col-xs-6 lbl_data">{{model.homeTown}}</label>
+                    </div>
                 </div>
-                <div class="form-group has-feedback">
-                <label class="control-label col-sm-2">Hometown</label>
-                <label class="col-sm-10 col-xs-6 lbl_data">{{model.homeTown}}</label>
-                </div>
-            </div>
             </div>
         </div>
     </div>
 
+    {{#if model.haveEditAccess}}
     {{modal/profile/personal-info-modal item=model update="updatePersonalInfo"}}
-
-
+    
     <div class="panel panel-primary panel-sections personal-info">
         <div class="panel-heading">
             <h2>Email Notifications</h2>
@@ -291,6 +306,7 @@
             </div>
         </div>
     </div>
+    {{/if}}
 </div>
     <!--<div class="form-group has-feedback {{if model.isValidFirstName 'has-success' 'has-error'}}">
         <label class="col-sm-2 control-label">Frist name*</label>

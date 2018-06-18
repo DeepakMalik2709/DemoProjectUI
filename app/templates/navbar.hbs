@@ -182,8 +182,8 @@
 	                                <!-- Menu Footer-->
 	                                <li class="user-footer">
 	                                    <div class="pull-left">
-	                                        {{#link-to 'profile'  class="btn btn-default btn-flat"}}Profile
-	    										  {{/link-to}}
+	                                        {{#link-to 'profile' model.loginUser.id  class="btn btn-default btn-flat"}}Profile
+	    									{{/link-to}}
 	                                    </div>
 	                                    <div class="pull-right">
 	                                        <a href="/a/public/logout" class="btn btn-default btn-flat">Sign out</a>
