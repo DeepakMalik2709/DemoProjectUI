@@ -5,56 +5,67 @@ import authenticationMixin from '../mixins/authentication';
 export default Ember.Route.extend(authenticationMixin , {
 	profileService: Ember.inject.service('profile'),
     model(params) {
-    	var context = this.contextService.fetchContext((result)=>{
-			let certificates = [];
+		var _this = this;
+		var context;
 
-			var _this = this;
+		if(params.profileId == undefined) {
+			context = this.contextService.fetchContext((result)=> _this.getContext(result));
+		} else {
+			context = this.get("profileService").getProfile(params.profileId).then((result)=> _this.getContext(result));
+		}
 
-			result.certificates.forEach(function(element) {
-				let certificate = _this.store.createRecord('certificate', {
-					certificateId: element.certificateId,
-					name: element.name,
-					date: element.date,
-					image: element.image,
-					organisation: element.organisation,
-					grade: element.grade,
-					appUserId: element.appUserId
-				});
-
-				certificates.push(certificate);
-			});
-
-    		var user = this.store.createRecord('user', {
-				id: result.loginUser.id, 
-        		lastName: result.loginUser.lastName,
-        		firstName: result.loginUser.firstName, 
-        		email : result.loginUser.email,
-        		photoUrl : result.loginUser.photoUrl,
-        		hasUploadedPhoto :  result.loginUser.hasUploadedPhoto,
-        		useGoogleDrive : result.loginUser.useGoogleDrive,
-        		useGoogleCalendar : result.loginUser.useGoogleCalendar,
-        		refreshTokenAccountEmail : result.loginUser.refreshTokenAccountEmail,
-        		sendGroupPostEmail : result.loginUser.sendGroupPostEmail  ,
-        		sendGroupPostMentionEmail: result.loginUser.sendGroupPostMentionEmail  ,
-        		sendPostCommentedEmail : result.loginUser.sendPostCommentedEmail  ,
-        		sendCommentMentiondEmail: result.loginUser.sendCommentMentiondEmail  ,
-        		sendCommentOnMentiondPostEmail : result.loginUser.sendCommentOnMentiondPostEmail  ,
-        		sendCommentReplyEmail : result.loginUser.sendCommentReplyEmail  ,
-        		sendCommentOnCommentEmail : result.loginUser.sendCommentOnCommentEmail  ,
-        		institutes : result.institutes,
-				instituteMembers : result.instituteMembers,
-				certificates: certificates
-        		});
-    		return user;
-    	});
-    	
     	return context;
     },
     
     
     init: function() {
     	 
-    },
+	},
+	
+	getContext(result) {
+		let certificates = [];
+
+		var _this = this;
+
+		result.certificates.forEach(function(element) {
+			let certificate = _this.store.createRecord('certificate', {
+				certificateId: element.certificateId,
+				name: element.name,
+				date: element.date,
+				image: element.image,
+				organisation: element.organisation,
+				grade: element.grade,
+				appUserId: element.appUserId
+			});
+
+			certificates.push(certificate);
+		});
+
+		var user = this.store.createRecord('user', {
+			id: result.loginUser.id, 
+			lastName: result.loginUser.lastName,
+			firstName: result.loginUser.firstName, 
+			email : result.loginUser.email,
+			photoUrl : result.loginUser.photoUrl,
+			hasUploadedPhoto :  result.loginUser.hasUploadedPhoto,
+			useGoogleDrive : result.loginUser.useGoogleDrive,
+			useGoogleCalendar : result.loginUser.useGoogleCalendar,
+			refreshTokenAccountEmail : result.loginUser.refreshTokenAccountEmail,
+			sendGroupPostEmail : result.loginUser.sendGroupPostEmail,
+			sendGroupPostMentionEmail: result.loginUser.sendGroupPostMentionEmail,
+			sendPostCommentedEmail : result.loginUser.sendPostCommentedEmail,
+			sendCommentMentiondEmail: result.loginUser.sendCommentMentiondEmail,
+			sendCommentOnMentiondPostEmail : result.loginUser.sendCommentOnMentiondPostEmail,
+			sendCommentReplyEmail : result.loginUser.sendCommentReplyEmail,
+			sendCommentOnCommentEmail : result.loginUser.sendCommentOnCommentEmail,
+			haveEditAccess: result.loginUser.haveEditAccess,
+			institutes : result.institutes,
+			instituteMembers : result.instituteMembers,
+			certificates: certificates
+			});
+		return user;
+	},
+
     setupController: function(controller, model) {
         this._super(controller, model);
         var model = this.controller.get('model');

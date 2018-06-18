@@ -31,11 +31,11 @@ export default Ember.Route.extend({
     }),
     showAddInstituteMessage : _.once(function(){
     	var this1 = this;
-    	setTimeout((function() {
+    	/*setTimeout((function() {
  			if(confirm("Please add your institute to AllSchool to help connect with your peers.")){
  				this1.transitionTo('profile');
  			}
-			 }), 2000);
+		}), 2000);*/
 
     }),
     openChannel :_.once(function(apiKey, email){
