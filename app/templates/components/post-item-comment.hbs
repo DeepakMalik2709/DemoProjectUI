@@ -4,7 +4,8 @@
       </a>
       <div class="comment-body">
           <div class="comment-heading">
-              <h4 class="user">{{item.createdByName}}</h4>
+              {{#link-to 'profile' item.createdById}}<h4 class="user">{{item.createdByName}}</h4>{{/link-to}}
+              <!--<h4 class="user">{{item.createdByName}}</h4>-->
               <h5 class="time">{{item.createdDisplayTime}}</h5>
           </div>
           <p class="{{unless item.isEditing 'show' 'hide'}}">{{{item.comment}}}</p>
