@@ -15,6 +15,8 @@ export default DS.Model.extend({
 	phoneNumber: DS.attr('number'),
 	about: DS.attr('string'),
 
+	userId: DS.attr('number'),
+
 	hasEditAccess: DS.attr('boolean'),
 
 	password: DS.attr('string'),

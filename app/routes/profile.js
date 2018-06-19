@@ -42,10 +42,15 @@ export default Ember.Route.extend(authenticationMixin , {
 		});
 
 		var user = this.store.createRecord('user', {
-			id: result.loginUser.id, 
+			userId: result.loginUser.id, 
 			lastName: result.loginUser.lastName,
 			firstName: result.loginUser.firstName, 
 			email : result.loginUser.email,
+			homeTown: result.loginUser.homeTown,
+			dob: result.loginUser.dob,
+			currentCity: result.loginUser.currentCity,
+			phoneNumber: result.loginUser.phoneNumber,
+			about: result.loginUser.about,
 			photoUrl : result.loginUser.photoUrl,
 			hasUploadedPhoto :  result.loginUser.hasUploadedPhoto,
 			useGoogleDrive : result.loginUser.useGoogleDrive,
@@ -211,7 +216,7 @@ export default Ember.Route.extend(authenticationMixin , {
 		},
 		
 		saveCertificate(model) {
-			model.set("appUserId", this.controller.get('model').get("id"));
+			model.set("appUserId", this.controller.get('model').get("userId"));
 
 			this.get("profileService").saveCertificate(model).then(result=>{
 				let newCertificate = this.store.createRecord('certificate', {
