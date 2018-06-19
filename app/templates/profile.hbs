@@ -193,10 +193,10 @@
     </div>
 
     {{#if model.haveEditAccess}}
-    {{modal/profile/certificate-modal appUserId=model.id update="saveCertificate"}}
+    {{modal/profile/certificate-modal appUserId=model.userId update="saveCertificate"}}
     
     {{#each model.certificates as |certificate index|}}
-        {{modal/profile/certificate-modal appUserId=model.id item=certificate update="updateCertificate"}}
+        {{modal/profile/certificate-modal appUserId=model.userId item=certificate update="updateCertificate"}}
         {{modal/core/delete-modal item=index modalId=(concat "delete-certificate-" certificate.certificateId) delete="deleteCertificate"}}
     {{/each}}
     {{/if}}
