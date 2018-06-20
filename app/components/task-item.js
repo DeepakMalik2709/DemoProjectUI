@@ -52,14 +52,14 @@ export default Ember.Component.extend(postMixin ,{
     	},
    	 	editClicked() {
     		this.sendAction("editTask", this.item);
-        },        
+        },
         deletePost(){
     		this.sendAction("deletePost", this.item);
     	},
     	saveComment(component ){
     		if(!Ember.get(this, "isSaving") && this.postComment){
     			Ember.set(this, "isSaving", true)
-    			
+
     		var json = {
     			comment : this.postComment,
     			recipients :  this.recipientList,
@@ -90,5 +90,5 @@ export default Ember.Component.extend(postMixin ,{
     	},
     	//end of actions
     },
-  
+
 });

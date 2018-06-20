@@ -13,7 +13,7 @@
 }
 .task-title{
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
 }
 .task-deadline-time{
 	    margin-left: 17px;
@@ -59,7 +59,7 @@
     margin-left: -8px;
     border: 8px solid transparent;
     border-top-color: #282828;
-}          
+}
 .file-list a{
 text-decoration:none;
 }
@@ -103,11 +103,11 @@ text-decoration:none;
     margin: 1px 4px 0 0;
     vertical-align: top;
     }
-    
+
 .connectedAccount{
 	vertical-align: super;
     font-weight: bold;
-}   
+}
 
 .pos-rel {
 	position: relative;
@@ -160,14 +160,14 @@ padding : 5px 0 ;
 .black-border-1px{
 border: 1px solid black !important;
 }
-/* 
+/*
 aside.right-side .row:nth-child(2){
 	    margin-left: 10px;
     margin-right: 10px;
 }
  */
- 
- 
+
+
 /* content editable start */
 
 [contenteditable]:empty:not(:focus):before,
@@ -286,7 +286,7 @@ a:focus {
   .left-side.collapse-left {
     left: -220px;
   }
-  
+
   .post-slide-images-container{
     width: 800px;
 	}
@@ -306,7 +306,7 @@ a:focus {
   .right-side > .content-header {
   	margin-top: 26%;
 	}
-	
+
 	.post-slide-images-container{
     width: 400px;
 	}
@@ -698,15 +698,15 @@ table.text-center th {
   .navbar .navbar-right {
     float: right;
   }
-  
+
    .form-box {
     width: 90%;
   }
-  
+
   .login-google-btn{
  	 height: 40px;
   }
-  
+
   .navbar-nav > li > a.no-padding{
 	    left: -40px;
 }
@@ -860,7 +860,7 @@ table.text-center th {
     left: 0px;
   }
 }
-/* 
+/*
     Dropdown menus
 ----------------------------
 */
@@ -1241,7 +1241,7 @@ table.text-center th {
     left: auto;
   }
 }
-/* 
+/*
    All form elements including input, select, textarea etc.
 -----------------------------------------------------------------
 */
@@ -1291,7 +1291,7 @@ table.text-center th {
 .radio {
   padding-left: 0;
 }
-/* 
+/*
     Compenent: Progress bars
 --------------------------------
 */
@@ -2166,7 +2166,7 @@ Component: timeline
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
-/* 
+/*
     Component: callout
 ------------------------
 */
@@ -2206,7 +2206,7 @@ Component: timeline
 .callout.callout-info h4 {
   color: #3A87AD;
 }
-/* 
+/*
     Component: alert
 ------------------------
 */
@@ -2511,7 +2511,7 @@ Component: timeline
   margin-top: 30px;
   text-align: center;
 }
-/* 
+/*
     Page: register and login
 */
 /* .form-box {
@@ -2571,7 +2571,7 @@ Component: timeline
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* 
+/*
     Page: 404 and 500 error pages
 ------------------------------------
 */
@@ -2621,7 +2621,7 @@ Component: timeline
 .error-page:after {
   clear: both;
 }
-/* 
+/*
     Page: Invoice
 */
 .invoice {
@@ -2654,12 +2654,12 @@ Component: timeline
     white-space: normal!important;
   }
 }
-/* 
+/*
     Skins
     -----
 */
-/* 
-    Skin Blue 
+/*
+    Skin Blue
     ---------
 */
 /* skin-blue navbar */
@@ -2679,7 +2679,7 @@ Component: timeline
   color: #f6f6f6;
 }
 .skin-blue .navbar .navbar-right > .nav {
-   margin-right: 10px; 
+   margin-right: 10px;
 }
 .skin-blue .navbar .sidebar-toggle .icon-bar {
   background: rgba(255, 255, 255, 0.8);
@@ -3205,7 +3205,7 @@ width:100%;
   .navbar-right .notifications-menu{
    display:none;
   }
-  
+
 }
 footer.page-footer{
 }
@@ -3242,7 +3242,7 @@ footer.page-footer{
 	     height: 0px;
 }
 .institute-member-role-select{
-	
+
 }
 .power-select-container{
 	display:inline-block;
@@ -3307,7 +3307,7 @@ display: inline-block;
 .loader-library-adding{
 	top : 50px;
 	left : 50px;
-	
+
 }
 
 .attachment-view{

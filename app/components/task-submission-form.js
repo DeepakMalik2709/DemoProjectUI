@@ -74,13 +74,13 @@ export default Ember.Component.extend(postMixin , {
   				  alert("You cannot upload more than 10 files");
   				  return;
   			  }
-  			  for(var i=0;i<files.length;i++){
-  				  var file = files[i];
-  				  if(file.size > 10485760) {
-  					  alert("file size must be less than 10 MB.");
-  					  return;
-  				  }
-  			  }
+  			  // for(var i=0;i<files.length;i++){
+  				//   var file = files[i];
+  				//   if(file.size > 10485760) {
+  				// 	  alert("file size must be less than 10 MB.");
+  				// 	  return;
+  				//   }
+  			  // }
   			  Ember.set(this, "isUploading", true);
   				this.get("postService").uploadFile(files).then((result)=>{
   					Ember.set(this, "isUploading", false);

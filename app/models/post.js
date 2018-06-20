@@ -19,13 +19,17 @@ export default DS.Model.extend({
 	  reponseMaybe: DS.attr('number'),
 	  totalAttendee: DS.attr('number'),
 	  isSaving : DS.attr('boolean'),
-	  isSubmitted : DS.attr('boolean'),
-	  canSubmit : DS.attr('boolean'),
+
 	  title: DS.attr('string'),
 	  deadlineTime: DS.attr('number'),
 	  isTask : DS.attr('boolean'),
 	  isPost : DS.attr('boolean'),
 	  isSchedule: DS.attr('boolean'),
+		/* Task Variable */
+		noOfSubmissions: DS.attr('number'),
+		isSubmitted : DS.attr('boolean'),
+	  canSubmit : DS.attr('boolean'),
+		
 	  /* schedule variables */
 	  location:DS.attr(""),
 		start:DS.attr('number'),
@@ -41,7 +45,7 @@ export default DS.Model.extend({
 		  toDate: DS.attr('number'),
 		  allDayEvent : DS.attr('boolean'),
 		  /* schedule variables */
-		  
+
 	  files: DS.attr( {
 		    defaultValue() { return []; }
 		  }),
@@ -62,6 +66,7 @@ export default DS.Model.extend({
 	tags: DS.attr( {
 		    defaultValue() { return []; }
 	  }),
+
 	  newTag: DS.attr('string'),
 	  isValid: Ember.computed('comment', 'isSaving', function() {
 		  if(this.get('isSaving')){
@@ -75,6 +80,11 @@ export default DS.Model.extend({
 		  }
 		    return false;
 		}),
-		
+		showResubmissionDiv : Ember.computed('isSubmitted', 'canSubmit', function() {
+ 		  if(this.get('canSubmit') && this.get('isSubmitted')){
+ 			  return true;
+ 		  }
+ 		    return false;
+ 		}),
 		isPrivatePost: Ember.computed.equal('postCategory', 'PRIVATE')
 });
