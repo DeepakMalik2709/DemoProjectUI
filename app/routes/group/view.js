@@ -225,6 +225,7 @@ export default Ember.Route.extend(ajaxMixin,authenticationMixin,instituteMixin, 
 	        	this.get('groupService').deleteMember(model , member ).then((result)=>{
 	        		if (result.code == 0 ){
 	        			model.get("members").removeObject(member);
+                model.get("joinRequests").removeObject(member);
 	        		}
 	        	});
 	        }
@@ -307,11 +308,11 @@ export default Ember.Route.extend(ajaxMixin,authenticationMixin,instituteMixin, 
 	    },
         showJoinRquests(){
         	var model = this.controller.get('model');
-	    	if(typeof model.get("joinRequests") == 'undefined' || model.get("joinRequests").length <=0){
+	    	  if(typeof model.get("joinRequests") == 'undefined' || model.get("joinRequests").length <=0){
 	    		  this.set('hasMoreRequestRecords', true);
-	         	    this.set('joinRequestNextPageLink', null);
-	                 this.fetchJoinRquests();
-			}
+	         	this.set('joinRequestNextPageLink', null);
+	          this.fetchJoinRquests();
+			    }
         	Ember.$("#members-request-modal").modal("show");
         },
         approveMember(member){
