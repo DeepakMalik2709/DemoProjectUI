@@ -6,48 +6,66 @@
 	    </div>
     </form>
 </section>
-<section class="content">   
+<section class="content">
        <div class="row index-page">
                 <div class="col-lg-12">
-                    <h3 class="page-header">{{model.title}} 
+                    <h3 class="page-header">{{model.title}}
                   </h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            
+
        <div class="row index-page">
-    
-    <div class="col-md-12"> 
-      
+
+    <div class="col-md-12">
+
       <div class="panel {{if model.noBoxShadow 'no-box-shadow' ''}}" ng-show="searchResults.length">
-        <div class="panel-body" >   
-        
-        {{#if model.searchResults}}
+        <div class="panel-body" >
+					<div class="row index-page">
+							 <div class="col-lg-12 message">
+								 <div class="error-page">
+										 <div class="headline text-info">
+											 <i class="fa fa-home text-green"></i>
+										 </div>
+										 <div class="error-content">
+												 <h2>Welcome to AllSchool</h2>
+												 <p style="margin: 5px">
+														 We are contantly working to enhance your experience on our app.
+
+														 Feel free to contact us anytime for any query or feedback.
+												 </p>
+										 </div>
+								 </div>
+							 </div>
+							 <!-- /.col-lg-12 -->
+					 </div>
           <!--/stories-->
+        <!-- {{#if model.searchResults}}
+
           {{#each model.searchResults as |tutorial|}}
             {{#tutorial-search-result item=tutorial isLoggedIn=isLoggedIn}}{{/tutorial-search-result}}
           {{/each}}
-        {{/if}}      
-        {{#if model.noResults}}         
+        {{/if}}       -->
+        {{#if model.noResults}}
            <div class="row index-page">
                 <div class="col-lg-12 message">
                    Welcome to AllSchool
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        {{/if}}        
+        {{/if}}
             <!--/stories-->
-            
+
 <!-- {{#if model.nextLink}}
  <a href="javascript:void(0);"  {{action "loadTutorials"}} class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
  {{/if}} -->
-          
+
         </div>
       </div>
-                                                                                       
-	                                                
-                                                      
+
+
+
    	</div><!--/col-12-->
   </div>
 </section>

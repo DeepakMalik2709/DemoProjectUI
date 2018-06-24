@@ -19,12 +19,13 @@
                     <i class="fa fa-info-circle text-primary" style="width: 15px; margin: 5px "></i> Info
               </button>
             {{/link-to}}
+            <a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>
+              <button class="btn btn-default">
+                <i class="fa fa-share-square text-primary" style="width: 15px; margin: 5px "></i> Invite
+              </button>
+            </a>
         {{/if}}
-        <a href="#" data-toggle="modal" {{action 'copyPublicLink'}}>
-          <button class="btn btn-default">
-            <i class="fa fa-share-square text-primary" style="width: 15px; margin: 5px "></i> Invite
-          </button>
-        </a>
+
         {{#if model.isAdmin}}
             {{#link-to 'group.edit' model.id}}
                 <button class="btn btn-default">
@@ -32,7 +33,25 @@
                 </button>
             {{/link-to}}
         {{/if}}
-        <div style="display : inline">
+
+        {{#if model.isGroupAttendaceAllowed}}
+          {{#if model.canMarkAttendance}}
+               {{#link-to 'group.attendance' model.id}}
+                   <button class="btn btn-default">
+                        Attendance
+                   </button>
+               {{/link-to}}
+            {{else}}
+                {{#link-to 'attendance.view' model.id}}
+                    <button class="btn btn-default">
+                         Attendance
+                    </button>
+                {{/link-to}}
+            {{/if}}
+        {{/if}}
+
+
+        <!-- <div style="display : inline">
             <button type="button" class="btn btn-default" data-toggle="dropdown">
                 <i class="fa fa-chevron-circle-down text-primary" style="width: 15px; margin: 5px "></i> More..
             </button>
@@ -47,12 +66,10 @@
                     {{/if}}
                 </li>
                 <li>
-                	{{#if model.isAdmin}}
-    	               {{#link-to 'group.task.create'}}Create Task{{/link-to}}
-    	            {{/if}}
     			      </li>
             </ul>
-      </div>
+      </div> -->
+
 	    </div>
     </div>
 	    <!-- /.col-lg-12 -->

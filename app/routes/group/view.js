@@ -202,11 +202,11 @@ export default Ember.Route.extend(ajaxMixin,authenticationMixin,instituteMixin, 
         },
         showMembers(){
         	var model = this.controller.get('model');
-	    	if(typeof model.get("members") == 'undefined' || model.get("members").length <=0){
-	    		  this.set('hasMoreRecords', true);
-	         	    this.set('nextPageLink', null);
-	                 this.fetchMembers(model);
-			}
+	    	  if(typeof model.get("members") == 'undefined' || model.get("members").length <=0){
+	    		     this.set('hasMoreRecords', true);
+	         	   this.set('nextPageLink', null);
+	             this.fetchMembers(model);
+			    }
         	Ember.$("#members-list-modal").modal("show");
         },
         fetchMoreMembers(){
