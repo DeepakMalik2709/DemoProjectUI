@@ -9,9 +9,10 @@ export default Ember.Route.extend(authenticationMixin, tutorialMixin, utilsMixin
 	model() {
     	 var dashboard = Ember.Object.create({
              loginUser: null,
-             myTutorials: [],
-             myTutorialsNextLink: "",
-             todaySchedules: [],
+             taskList: [],
+						 taskListCount:  0,
+             scheduleList: [],
+						 scheduleListCount: 0,
              isLoading: false,
              posts:[]
          });
@@ -41,26 +42,32 @@ export default Ember.Route.extend(authenticationMixin, tutorialMixin, utilsMixin
         	}
         });
 
-      /*  this.get('dashboardService').dashboardData().then((result) => {
+       this.get('dashboardService').dashboardData().then((result) => {
         	var modifiedSchedulesList = [];
         	if(result.code==0){
-        		for(var i =0; i<result.todaySchedules.length;i++){
-            		var actualSchedule = result.todaySchedules[i];
-            		var modifiedSchedule = {};
-            		modifiedSchedule.title = actualSchedule.title;
-            		modifiedSchedule.eventType = actualSchedule.eventType;
+						model.set("taskList", result.taskList);
+						model.set("taskListCount", result.taskListCount);
+						model.set("scheduleList", result.scheduleList);
+						model.set("scheduleListCount", result.scheduleListCount);
 
-            		var timing = this.dateTimeFormatAMPM(new Date(actualSchedule.start));
-            		if(actualSchedule.end != null){
-            			timing = timing+" - "+this.dateTimeFormatAMPM(new Date(actualSchedule.end));
-            		}
-            		modifiedSchedule.timing = timing;
 
-            		modifiedSchedulesList[i] =modifiedSchedule;
-            	}
-        		model.set("todaySchedules", modifiedSchedulesList);
+						// for(var i =0; i<result.todaySchedules.length;i++){
+            // 		var actualSchedule = result.todaySchedules[i];
+            // 		var modifiedSchedule = {};
+            // 		modifiedSchedule.title = actualSchedule.title;
+            // 		modifiedSchedule.eventType = actualSchedule.eventType;
+						//
+            // 		var timing = this.dateTimeFormatAMPM(new Date(actualSchedule.start));
+            // 		if(actualSchedule.end != null){
+            // 			timing = timing+" - "+this.dateTimeFormatAMPM(new Date(actualSchedule.end));
+            // 		}
+            // 		modifiedSchedule.timing = timing;
+						//
+            // 		modifiedSchedulesList[i] =modifiedSchedule;
+            // 	}
+        		// model.set("todaySchedules", modifiedSchedulesList);
         	}
-        });  */
+        });
     },
 
 

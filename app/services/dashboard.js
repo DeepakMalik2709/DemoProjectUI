@@ -35,11 +35,11 @@ export default DS.Store.extend(ajaxMixin,{
 	},
 	dashboardData:function(){
 		return  new Ember.RSVP.Promise((resolve, reject) =>{
-			var url ="/rest/dashboard/dataList";
+			var url ="/rest/dashboard";
 			this.doGet(url).then((data) =>{
 		    	  resolve(data);
 		      });
 		});
 	}
-	
+
 });

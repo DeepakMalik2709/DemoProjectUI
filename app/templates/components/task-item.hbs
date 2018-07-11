@@ -5,12 +5,18 @@
                     <img src="{{item.photoUrl}}" class="img-circle avatar" alt="user profile image">
                 </div>
                 <div class="col-md-9 col-sm-9 col-lg-9">
-                	<div class="row">
-	                    <div class="title h5 col-md-8 col-sm-8 col-lg-8">
-	                        <a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>
-	                       posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
+                	<div>
+	                    <div class="">
+                        {{#link-to 'profile' item.postCreatorId}}<b>{{item.createdByName}}</b>{{/link-to}}
+                                    <!--<a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>-->
+                                   {{#if item.isPrivatePost}}
+                         posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
+                         {{/if}}
 	                    </div>
-	                   <div class="title h5 col-md-3 col-sm-3 col-lg-3 pull-right text-muted time"> {{item.createdDisplayTime}}</div>
+	                   <div class="text-muted time">
+                       <i class="fa fa-clock-o" data-toggle="tooltip" title="Posted On"></i>
+                       {{item.createdDisplayTime}}
+                     </div>
                    </div>
                    {{#if canDelete}}
                    <div class="row">

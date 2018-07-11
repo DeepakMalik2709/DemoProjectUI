@@ -11,42 +11,80 @@
 <section class="content">
 
 <!-- Small boxes (Stat box) -->
-{{!--
-<div class="row">
+
+<!-- <div class="row">
     <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
                 <h3>
-                    {{model.loginUser.noOfTutorials}}
+                    {{model.taskListCount}}
                 </h3>
                 <p>
-                    Tutorials!
+                    Tasks
                 </p>
             </div>
             <div class="icon">
-                <i class="fa fa-bar-chart-o fa-fw"></i>
+                <i class="fa fa-tasks fa-fw"></i>
             </div>
             <a href="#" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
     </div>
-</div>
---}}
+
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>
+                    {{model.scheduleListCount}}
+                </h3>
+                <p>
+                    Scheduled Events
+                </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-clock-o fa-fw"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>
+                    {{model.loginUser.noOfTutorials}}
+                </h3>
+                <p>
+                    New Posts
+                </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-inbox fa-fw"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+</div> -->
+
 <!-- /.row -->
 <div class="row">
 
-	<section class="col-lg-12 connectedSortable">    
+	<section class="col-lg-6 col-xs-12 connectedSortable">
 		<div class="box box-primary">
-              <div class="box-header" style="cursor: move;">
+              <div class="box-header" style="cursor: move; padding: 0px">
                  <!-- tools box -->
-                 <div class="pull-right box-tools">                                        
+                 <div class="pull-right box-tools">
                  </div><!-- /. tools -->
 
-                 <i class="fa fa-calendar"></i>
+                 <i class="fa fa-tasks"></i>
                  <h3 class="box-title">
-                     Today's Schedule
+                     Monthly Task ({{model.taskListCount}})
                  </h3>
              </div>
              <div class="box-body no-padding">
@@ -55,31 +93,94 @@
                      <table class="table table-striped">
                          <tbody><tr>
                              <th>Title</th>
-                             <th>Type</th>
-                             <th>Timing/Deadline</th>
+                             <th>Group</th>
+                             <th>Deadline</th>
+                             <th>Submission</th>
                          </tr>
-                         {{#each model.todaySchedules as |schedule|}}
+                         {{#each model.taskList as |task|}}
                          <tr>
-                             <td>{{schedule.title}}</td>
-                             <td>{{schedule.type}}</td>
-                             <td>{{schedule.timing}}</td>
+                             <td>
+                               {{#link-to "group.post" task.id}}
+     	                      	   {{task.title}}
+     	                         {{/link-to}}
+                             </td>
+                             <td>{{task.groupName}}</td>
+                             <td>{{task.deadlineTimeString}}</td>
+                             <td>
+                               {{#if task.isSubmitted}}
+                                 <span class="label label-success">
+                                   Done
+                                 </span>
+                               {{else}}
+                                 <span class="label label-warning">
+                                   Pending
+                                 </span>
+                               {{/if}}
+                             </td>
                          </tr>
                          {{else}}
-						  Hey, You are free today.. :)
-						 {{/each}}
-                         
+                             <span class="label label-primary" style="font-size: 12px; margin-left : 5px">
+                               No task available for this month.
+                             </span>
+            						 {{/each}}
+
                      </tbody></table><!-- /.table -->
                  </div>
              </div><!-- /.box-body-->
-         </div>    
+         </div>
     </section>
-    
+
+    <section class="col-lg-6 col-xs-12 connectedSortable">
+  		<div class="box box-primary">
+                <div class="box-header" style="cursor: move; padding: 0px">
+                   <!-- tools box -->
+                   <div class="pull-right box-tools">
+                   </div><!-- /. tools -->
+
+                   <i class="fa fa-clock-o"></i>
+                   <h3 class="box-title">
+                       Monthly Schedule ({{model.scheduleListCount}})
+                   </h3>
+               </div>
+               <div class="box-body no-padding">
+                   <div class="table-responsive">
+                       <!-- .table - Uses sparkline charts-->
+                       <table class="table table-striped">
+                           <tbody><tr>
+                               <th>Title</th>
+                               <th>Group</th>
+                               <th>From</th>
+                               <th>To</th>
+                           </tr>
+                           {{#each model.scheduleList as |schedule|}}
+                           <tr>
+                               <td>
+                                 {{#link-to "group.post" schedule.id}}
+       	                      	   {{schedule.title}}
+       	                         {{/link-to}}
+                               </td>
+                               <td>{{schedule.groupName}}</td>
+                               <td>{{schedule.fromDateString}}</td>
+                               <td>{{schedule.toDateString}}</td>
+                           </tr>
+                           {{else}}
+                               <span class="label label-primary" style="font-size: 12px; margin-left : 5px">
+                                 No schedule available for this month.
+                               </span>
+              						 {{/each}}
+
+                       </tbody></table><!-- /.table -->
+                   </div>
+               </div><!-- /.box-body-->
+           </div>
+      </section>
+
     {{!--
-    <section class="col-lg-6 connectedSortable">    
+    <section class="col-lg-6 connectedSortable">
     	<div class="box box-primary">
             <div class="box-header">
                 <!-- tools box -->
-                <div class="pull-right box-tools">                                        
+                <div class="pull-right box-tools">
                    <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
                 </div><!-- /. tools -->
 
@@ -97,7 +198,7 @@
                          <th>Title</th>
                             <th>Date</th>
                             <th>Author</th>
-                        </tr>                                
+                        </tr>
                         {{#each model.myTutorials as |tutorial|}}
                         <tr>
 	                        <td>
@@ -117,16 +218,16 @@
                 </p>
                 {{/if}}
             </div><!-- /.box-body-->
-           
-        </div>           
+
+        </div>
     </section>
-    
+
     --}}
-    
-    
-    
-    
-</div>          <!-- /.row -->   
+
+
+
+
+</div>          <!-- /.row -->
 
 
 
