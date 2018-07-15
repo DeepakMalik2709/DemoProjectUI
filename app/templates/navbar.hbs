@@ -1,9 +1,9 @@
  <header class="header">
-            
+
             <a href="/home"  class="logo">
             	 AllSchool
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-             
+
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation" style="padding-right: 20px;">
@@ -18,20 +18,20 @@
                 {{/if}}
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less--> 
+                        <!-- Messages: style can be found in dropdown.less-->
                          {{#if isLoggedIn}}
 						<!--	<li><a href="/a/public/logout"><i class="fa fa-sign-out fa-fw"></i>  Logout</a></li> -->
                         {{else}}
 			                 <li class="dropdown">
 			             		<!--  <a href="/a/oauth/googleLogin"><i class="fa fa-user fa-fw"></i> Login</a> -->
 			             		 <a href="/a/oauth/googleLogin" class="no-padding"><img src="/img/btn_google_signin_dark_pressed_web.png" class="login-google-btn" /></a>
-			                 </li>                         	
-                        
+			                 </li>
+
 		                {{/if}}
-                      
+
                       {{#if showNotifications}}
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
+                        <li class="dropdown notifications-menu" style="display: inline">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell {{if newNotifications 'text-danger' '' }}"></i>
                                 <span class="label label-warning"><!-- 10 --></span>
@@ -46,9 +46,9 @@
                                              <a href="javascript:void(0);" {{action "notificationClick" notification}}>
                                                    <div>
                                                    <div class='notification-msg'>
-                                    <i class="fa fa-comment fa-fw"></i><span class="text-primary">{{notification.senderName}}</span> {{notification.actionKey}} 
+                                    <i class="fa fa-comment fa-fw"></i><span class="text-primary">{{notification.senderName}}</span> {{notification.actionKey}}
                                     {{#if notification.showGroupName}}
-                                    <span class="text-primary">{{notification.groupName}} </span> 
+                                    <span class="text-primary">{{notification.groupName}} </span>
                                     {{/if}}
                                     </div>
                                     <span class="pull-right text-muted small mtop3">{{notification.createdDisplayTime}}</span>
@@ -59,8 +59,8 @@
                                             </a>
                                         </li>
                                          {{/each}}
-                                        
-                  <!--                       
+
+                  <!--
                                         <li>
                                             <a href="javascript:void(0);">
                                              <i class="ion ion-ios7-people info"></i> 5 new members joined today
@@ -70,7 +70,7 @@
                                                      <i class="ion ion-ios7-person danger"></i> You changed your username
                                             </a>
                                         </li> -->
-                                       
+
                                     </ul>
                                 </li>
                                <!--  <li class="footer"><a href="javascript:void(0);">View all</a></li> -->
@@ -151,7 +151,7 @@
                         {{/if}}
                         <!-- User Account: style can be found in dropdown.less -->
                         {{#if isLoggedIn}}
-                         
+
 	                         <li class="dropdown user user-menu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                               <img width="18" src="{{model.loginUser.photoUrl}}">
@@ -178,7 +178,7 @@
 	                                        <a href="#">Friends</a>
 	                                    </div>
 	                                </li>
-	                           -->     
+	                           -->
 	                                <!-- Menu Footer-->
 	                                <li class="user-footer">
 	                                    <div class="pull-left">
@@ -191,7 +191,7 @@
 	                                </li>
 	                            </ul>
 	                        </li>
-                      
+
                         {{/if}}
                     </ul>
                 </div>

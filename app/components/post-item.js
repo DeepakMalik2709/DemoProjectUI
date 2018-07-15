@@ -17,11 +17,11 @@ export default Ember.Component.extend(postMixin ,{
 		  this.set("recipientList" , []);
 	  },
     actions: {
-    
+
     	saveComment(component ){
     		if(!Ember.get(this, "isSaving") && this.postComment){
     			Ember.set(this, "isSaving", true)
-    			
+
     		var json = {
     			comment : this.postComment,
     			recipients :  this.recipientList,
@@ -109,12 +109,12 @@ export default Ember.Component.extend(postMixin ,{
     	    	});
             }
     	},
-    	
+
     	reactToPost(){
     		Ember.set(this, "disableReactButton", true);
     		this.get("postService").reactToPost( Ember.get(this.item, "id")).then((result)=>{
     			Ember.set(this, "disableReactButton", false);
-    			console.log(result);
+    			console.log("React to post result:"+result);
         		if(result.code == 0){
         			Ember.set(this.item, "numberOfReactions", result.item);
 	    		}
@@ -128,10 +128,10 @@ export default Ember.Component.extend(postMixin ,{
     	     				window.location.href= "/a/oauth/googleAllAuthorization";
     	     			}
     				}
-    	    	
+
     	    }
     	//end of actions
     },
-   
-  
+
+
 });

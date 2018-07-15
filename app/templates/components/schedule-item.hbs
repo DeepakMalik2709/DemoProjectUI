@@ -9,9 +9,8 @@
 	                    <div class="">
                         {{#link-to 'profile' item.postCreatorId}}<b>{{item.createdByName}}</b>{{/link-to}}
                                     <!--<a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>-->
-                                   {{#if item.isPrivatePost}}
                          posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
-                         {{/if}}
+                         
 	                    </div>
 	                   <div class="text-muted time">
                        <i class="fa fa-clock-o" data-toggle="tooltip" title="Posted On"></i>

@@ -1,5 +1,5 @@
   <div class="col-md-12 col-sm-12 col-lg-12">
-        <div class="panel panel-white post panel-shadow" style="overflow-y: auto; max-height: 400px;">
+        <div class="panel panel-white post panel-shadow">
             <div class="post-heading col-md-12 col-sm-12 col-lg-12">
                 <div class="col-md-1 col-sm-1 col-lg-1">
                     <img src="{{item.photoUrl}}" class="img-circle avatar" alt="user profile image">
@@ -9,9 +9,9 @@
 	                    <div>
             							{{#link-to 'profile' item.postCreatorId}}<b>{{item.createdByName}}</b>{{/link-to}}
             	                        <!--<a href="javascript:void(0);"><b>{{item.createdByName}}</b></a>-->
-            	                       {{#if item.isPrivatePost}}
+
             						   posted in <b> {{#link-to 'group.posts' item.groupId tagName="a" class="text-muted cp"}}{{item.groupName}}{{/link-to}}</b>.
-            						   {{/if}}
+
 	                    </div>
 	                    <div class="text-muted time">
                         <i class="fa fa-clock-o" data-toggle="tooltip" title="Posted On"></i>
@@ -73,21 +73,25 @@
             						        {{/each}}
             						        </ol> -->
         			       			</div>
-        			            <div class="stats {{unless item.isEditing 'show' 'hide'}}">
-        	                    <a href="javascript:void(0);" class="btn btn-default stat-item" disabled={{disableReactButton}} {{action "reactToPost"}}>
-        	                        <i class="fa fa-thumbs-up icon"></i>{{item.numberOfReactions}}
-        	                    </a>
-        			           	</div>
+
+                          <div>
+                            <h4 class="{{unless item.isEditing 'show' 'hide'}} row post-tags">
+                              {{#each item.tags as |tag|}}
+                                <span class="post-tag label label-default">
+                                  {{tag.name}}
+                                </span>
+                              {{/each}}
+                            </h4>
+                          </div>
         			       	</div>
         					</div>
 
-					<h4 class="{{unless item.isEditing 'show' 'hide'}} row post-tags">
-						{{#each item.tags as |tag|}}
-							<span class="post-tag label label-default">
-								{{tag.name}}
-							</span>
-						{{/each}}
-					</h4>
+                  <div class="stats {{unless item.isEditing 'show' 'hide'}}">
+                      <a href="javascript:void(0);" class="btn btn-default stat-item" disabled={{disableReactButton}} {{action "reactToPost"}}>
+                          <i class="fa fa-thumbs-up icon"></i>{{item.numberOfReactions}}
+                      </a>
+                  </div>
+
                 </div>
          </div>
        <div class="post-footer {{if item.isEditing 'hideBorder' ''}}">
