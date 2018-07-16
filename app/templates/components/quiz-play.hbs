@@ -13,7 +13,7 @@
            </p>
            <ul class="answers">
            {{#each selectedQuestion.options as |option|}}
-               <input type="radio" name="option.title" value="option" id="option.id" {{action "saveOption" selectedQuestion option}}><label for="option.title"> ({{option.number}}) {{option.title}}</label><br/>
+               <input type="radio" name="option.title" value={{option.selected}} id="option.id" {{action "saveOption" selectedQuestion option}}><label for="option.title"> ({{option.number}}) {{option.title}}</label><br/>
              {{/each}}
            </ul>
         </div>

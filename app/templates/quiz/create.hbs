@@ -1,53 +1,23 @@
+<!-- left column for grid-->
+<div class="col-md-8">
+    {{common-grid tableSchema=tableSchema rows=rows  rowClickAction="quizClick"}}
+</div>
+<div class="col-md-4">
+  <!-- general form elements -->
+  <!-- /.box-header -->
+      <!-- form start -->
+      <div class="box box-primary">
+          <div class="box-header">
+                </div>
 
-        <!-- left column -->
-         <div class="col-md-3">
-         </div>
-        <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title">{{pageTitle}}</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form role="form">
-                    <div class="box-body">
-                        <div class="form-group">
-                            {{input type="text" value=model.name class="form-control" placeholder="Quiz  name" }}
-                        </div>
-                        <div class="form-group">
-                            {{input type="text" value=model.subject class="form-control" placeholder="Quiz  Subject" }}
-                        </div>
-                        <div class="form-group">
-                            {{input type="text" value=model.marks class="form-control" placeholder="Quiz  marks" }}
-                        </div>
-                        <div class="form-group">
-                            {{input type="text" value=model.passingRules class="form-control" placeholder="Quiz  passingRules" }}
-                        </div>
-                        <div class="form-group">
-                                <label for="exampleInputFile">Quiz desc</label> <small>Write something about quiz</small>
-                              {{textarea type="text" value=model.description class="form-control" placeholder="Description"}}
-                        </div>
+        {{quiz-form      isAdd=true      changeset=changeset      submit="submit"    }}
 
-                       {{task-item-deadline item=model title="Quiz Start Time" fieldName='fromDateTime' }}
-					             {{task-item-deadline item=model title="Quiz End Time" fieldName='toDateTime' }}
 
-                       <div class="form-group mtop10" >
-                         {{#power-select-multiple selected=selectedGroups options=myGroups  placeholder="Please, select Group"
-                              onchange=(action (mut selectedGroups))  as |attendees| }}
-                                {{attendees.name}}                          {{/power-select-multiple}}
-                      </div>
+ <div class="box-footer">
+        <button type="submit"  class="btn btn-primary {{if changeset.error.lru_files 'has-error'}}" {{action 'submit'}} >save</button>
+       <button  class="btn btn-default" {{action 'cancelAction'}}>Cancel</button>
 
-                      <div class="form-group mtop10" >
-                        {{#power-select-multiple selected=selectedques options=myQuestions  placeholder="Please, select question"
-                             onchange=(action (mut selectedques))  as |ques| }}
-                               {{ques.title}}                          {{/power-select-multiple}}
-                     </div>
+    </div>
 
-	                    <div class="box-footer">
-	                        <button type="submit"  class="btn btn-primary" {{action 'upsertQuiz' model selectedGroups selectedques}} >save</button>
-                         <button  class="btn btn-default" {{action 'cancelClicked'}}>Cancel</button>
-	                    </div>
-                   </div><!-- /.box-body -->
-                </form>
-            </div><!-- /.box -->
-         </div>
+          </div><!-- /.box -->
+</div>

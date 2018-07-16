@@ -17,4 +17,17 @@ export default DS.Store.extend(ajaxMixin,{
  					 });
  		});
  	},
+  queryAnsQues:function(json){
+
+   return  new Ember.RSVP.Promise((resolve, reject) =>{
+      var url = "/rest/anweredQuestion/query";
+      this.doPost(url , json ).then((data ) =>{
+        if(data.code=0){
+          resolve(data.items);
+        }else{
+          reject(data);
+        }
+      });
+   });
+ },
 });
