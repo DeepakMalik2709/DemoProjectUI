@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       quesRequest.then((response) => {
           this.set("myQuestions",response);
       });
-    }),
+    }).restartable(),
 
     actions:{
       includeTimeLine(){

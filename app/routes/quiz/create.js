@@ -1,8 +1,10 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import { validatePresence,  validateLength,  validateConfirmation,
-  			validateFormat } from 'ember-changeset-validations/validators';
+import { validatePresence } from 'ember-changeset-validations/validators';
+import { task } from 'ember-concurrency';
+
 export default Ember.Route.extend({
 
 	//	notifications: Ember.inject.service('notification-messages'),
@@ -41,7 +43,25 @@ export default Ember.Route.extend({
 				 controller.set('tableSchema', this.tableSchema);
 		 		  let quizs = this.store.findAll('quiz');
 		 			controller.set('rows',quizs);
-    },
+	},
+	
+	validate: task(function * () {
+		yield this.get('changeset').validate();
+	  }),
+	
+	  canSubmit: computed('changeset.isValid', function () {
+		return this.get('changeset.isValid');
+	  }).readOnly(),
+	
+	  //isValid: computed.and('changeset.isValid'),
+	
+	  save: task(function * () {
+	
+		let programLruTypeChangeset = this.get('programLruTypeChangeset');
+		if (programLruTypeChangeset.get('isDirty')) {
+		  yield this.get('saveChangeset').perform(programLruTypeChangeset, this.get('customerProgramLruType'));
+		}
+	  }),
 
     actions: {
 			quizClick(row){
@@ -59,6 +79,17 @@ export default Ember.Route.extend({
 				 this.transitionTo('quiz.grid');
 			},
 			submit() {
+				this.get('changeset').validate();
+				if (this.get('changeset.isValid')) {
+				  this.get('save').perform()
+					.then(() => {
+					  this._onSaveSuccess();
+					})
+					.catch((e) => {
+					  this._onSaveFail(e);
+					});
+				}
+
 				 console.log(quiz.toJSON());
 
 					for(var i =0 ;i < selGrp.length ;i++){

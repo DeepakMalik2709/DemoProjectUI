@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { task } from 'ember-concurrency';
 
 export default Ember.Component.extend({
 
@@ -14,23 +15,20 @@ export default Ember.Component.extend({
 	    this._super(...arguments);
       this.set('quizId',this.quizId);
       this.set('questions',this.items);
-      let querySelected = this.get('answeredQuesStore').queryAnsQues({quizId:params.quizId});
-      querySelected.then((res)=>{
-        this.set('answeredQuesList',res);
-      });
+     
       this.setUpRecord();
   },
-  setUpRecord:function(){
-    this.set('selectedQuestion',this.get('questions')[0]);
-    this.setSelectedOption(this.get('selectedQuestion'));
-  },
-  setSelectedOption:function(selectedQuestion){
+  setupOptions: task(function* (reload = false) {
+    let querySelected =yield this.get('answeredQuesStore').queryAnsQues({quizId:this.quizId});  
+      this.set('answeredQuesList',querySelected);
+
+    let selectedQuestion=this.get('questions')[0];
     let selectedAnsQuestion = this.set('answeredQuesList').findBy('questionId',selectedQuestion.id);
     let selectedOption = selectedQuestion.get('options').findBy('id',selectedAnsQuestion.get('optionId'));
     if(selectedOption != null){
           selectedOption.set('selected',true);
     }
-  },
+  }).restartable(),
   actions:{
     saveOption(question,option){
 
