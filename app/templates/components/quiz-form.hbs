@@ -1,21 +1,21 @@
 
 <form id="quiz-form" role="form" {{action "submit" on="submit" }}>
   <div class="box-body">
-          <div class="form-group {{if changeset.error.name 'has-error'}}">
+          <div class="form-group required {{if changeset.error.name 'has-error'}}">
              <label>Name</label>
               {{input type="text" value=changeset.name class="form-control" placeholder="Quiz  name" }}
               <div class="help-block">
                   {{changeset.error.name.validation}}
               </div>
           </div>
-          <div class="form-group  {{if changeset.error.subject 'has-error'}}">
+          <div class="form-group required {{if changeset.error.subject 'has-error'}}">
              <label>Subject</label>
               {{input type="text" value=changeset.subject class="form-control" placeholder="Quiz  Subject" }}
               <div class="help-block">
                   {{changeset.error.subject.validation}}
               </div>
           </div>
-          <div class="form-group  {{if changeset.error.marks 'has-error'}}">
+          <div class="form-group required  {{if changeset.error.marks 'has-error'}}">
              <label>Total Marks</label>
               {{input type="text" value=changeset.marks class="form-control" placeholder="Quiz  marks" }}
               <div class="help-block">
@@ -23,7 +23,7 @@
               </div>
           </div>
 
-            <div class="form-group  {{if changeset.error.passingRules 'has-error'}}">
+            <div class="form-group required {{if changeset.error.passingRules 'has-error'}}">
             <label>Passing Marks</label>
               {{input type="text" value=changeset.passingRules class="form-control" placeholder="Quiz  passingRules" }}
             <div class="help-block">
@@ -41,8 +41,8 @@
           <label>Start/End time</label>
           <span>{{x-toggle value=changeset.withTime theme='light'
             showLabels=true
-            onLabel=''
-            offLabel=''
+            onLabel=' Yes'
+            offLabel=' No'
             onToggle=(action (mut changeset.withTime))}} </span>
             <div class="help-block">
                 {{changeset.error.withTime.validation}}
@@ -68,34 +68,39 @@
 
         <div class="form-group  {{if changeset.error.shareWith 'has-error'}}" >
             <label>Share</label>
-            {{#power-select selected=changeset.shareWith options=myShareWith  placeholder="Share quiz with"
-               onchange=(action  "shareWithSet")  as |share| }}
+            {{#power-select selected=changeset.shareWith options=shareWithOptions  placeholder="Share quiz with"
+               onchange=(action   (mut changeset.shareWith))  as |share| }}
                  {{share}}                          {{/power-select}}
              <div class="help-block">
                  {{changeset.error.shareWith.validation}}
              </div>
         </div>
 
-        {{#if  shareWithGroup}}
-          <div class="form-group {{if changeset.error.selectedGroups 'has-error'}}" >
+        {{#if  (eq changeset.shareWith 'GROUP')}}
+          <div class="form-group {{if changeset.error.groups 'has-error'}}" >
             <label>Group</label>
-              {{#power-select-multiple selected=changeset.selectedGroups options=myGroups  placeholder="Please, select Group"
-                onchange=(action (mut selectedGroups))  as |attendees| }}
+              {{#power-select-multiple selected=changeset.groups options=groupOptions  placeholder="Please, select Group"
+                onchange=(action (mut changeset.groups))  as |attendees| }}
                   {{attendees.name}}                          {{/power-select-multiple}}
             <div class="help-block">
-                {{changeset.error.selectedGroups.validation}}
+                {{changeset.error.groups.validation}}
             </div>
           </div>
-      {{/if}}
+        {{/if}}
 
-      <div class="form-group  {{if changeset.error.selectedques 'has-error'}}" >
+        <div class="form-group  {{if changeset.error.questions 'has-error'}}" >
           <label>Question</label>
-          {{#power-select-multiple selected=changeset.selectedques options=myQuestions  placeholder="Please, select question"
-               onchange=(action (mut selectedques))  as |ques| }}
+          {{#power-select-multiple selected=changeset.questions options=questionOptions  placeholder="Please, select question"
+               onchange=(action (mut changeset.questions))  as |ques| }}
                  {{ques.title}}                          {{/power-select-multiple}}
            <div class="help-block">
-               {{changeset.error.selectedques.validation}}
+               {{changeset.error.questions.validation}}
            </div>
-         </div>
-         </div>
+        </div>
+    </div>
 </form>
+
+<div class="box-footer">
+    <button form="quiz-form" type="submit"  class="btn btn-primary" class="{{if submitDisabled 'disabled'}}"  disabled = "{{if submitDisabled 'disabled'}}">save</button>            
+    <button  class="btn btn-default" {{action 'cancelAction'}}>Cancel</button>
+</div>

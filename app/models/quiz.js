@@ -7,15 +7,16 @@ export default DS.Model.extend({
 	name: DS.attr('string'),
 	subject: DS.attr('string'),
 	createdByEmail: DS.attr('string'),
-  marks: DS.attr('string'),
-  passingRules: DS.attr('string'),
-  fromDateTime: DS.attr('number'),
-  toDateTime: DS.attr('number'),
-  totalAppeared: DS.attr('number'),
+	marks: DS.attr('string'),
+	passingRules: DS.attr('string'),
+	fromDateTime: DS.attr('number'),
+	toDateTime: DS.attr('number'),
+	totalAppeared: DS.attr('number'),
+	shareWith: DS.attr('string'),
 	questions:  DS.attr( {
 			defaultValue() { return []; }
 		}),
-  groups:  DS.attr( {
+ 	groups:  DS.attr( {
 			defaultValue() { return []; }
 		})
 
