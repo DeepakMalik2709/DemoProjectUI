@@ -38,7 +38,10 @@ export default Ember.Route.extend(ajaxMixin,authenticationMixin,instituteMixin, 
         controller.set("noJoinRequests" , false);
         this.set('hasMoreRecords', true);
 	      this.set('nextPageLink', null);
-	      this.fetchMembers(model);
+	      var this1 = this;
+	      setTimeout(function() {
+	    	  this1.fetchMembers(model);
+	      },100);
     },
     fetchMembers (group){
     	var controller = this.get("controller");
