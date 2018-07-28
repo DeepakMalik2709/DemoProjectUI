@@ -75,8 +75,47 @@ export default Ember.Route.extend({
         	  $.event.trigger( "postUpdate" , data );
           }
         });
+        
+       
     }),
-    setupController: function(controller, model) {
+    openFirebaseMessaging :_.once(function( email){
+    	var this2 = this;
+    	 /* firebase messaging here */
+    	if ('Notification' in window) {
+    		  var config = {
+    				    apiKey: "AIzaSyCfbL9I3XxRJ_1_JiOG2P-zffoQGnRMYiE",
+    				    authDomain: "allschool-a0217.firebaseapp.com",
+    				    databaseURL: "https://allschool-a0217.firebaseio.com",
+    				    projectId: "allschool-a0217",
+    				    storageBucket: "allschool-a0217.appspot.com",
+    				    messagingSenderId: "73095420401"
+    				  };
+    				  firebase.initializeApp(config);
+    				  
+	    	const messaging = firebase.messaging();
+	    	messaging.requestPermission().then(function() {
+	    		return messaging.getToken();
+	    		}).then(function(token){
+	    			this2.saveFirebaseChannelKey(token);
+	    		}).catch(function(err) {
+	    		  console.log('Unable to get permission to notify.', err);
+	    		});
+	    	
+	    	messaging.onTokenRefresh(function() {
+	    		  messaging.getToken().then(function(refreshedToken) {
+	    			  this2.saveFirebaseChannelKey(refreshedToken);
+	    		  }).catch(function(err) {
+	    		    console.log('Unable to retrieve refreshed token ', err);
+	    		    showToken('Unable to retrieve refreshed token ', err);
+	    		  });
+	    		});
+    	}else{
+			console.log("Browser does not support notifications")
+		}
+    }),
+    saveFirebaseChannelKey: function(key){
+    	this.contextService.saveFirebaseChannelKey(key);
+    },setupController: function(controller, model) {
         this._super(controller, model);
         controller.set("isLoggedIn", Ember.computed.notEmpty("model"));
         controller.set("showNotifications", false);
@@ -146,10 +185,9 @@ export default Ember.Route.extend({
 
 	    	var apiKey = model.get('pushToken.token');
 	        this.openChannel(apiKey, model.get('loginUser.email'));
+	        this.openFirebaseMessaging( model.get('loginUser.email'));
         }
         $.event.trigger( "sidebarUpdated");
-
-
     },
 
 

@@ -78,6 +78,10 @@ export default Ember.Service.extend(ajaxMixin ,utilsMixin ,{
 			this.context.set( "loginUser.photoUrl", this.context.get( "loginUser.photoUrl") + "?id=123");
 		}
 	},
+	saveFirebaseChannelKey(key){
+		var url = "/rest/secure/saveFirebaseChannelKey";
+		this.doPostForm(url , {"key":key});
+	},
 	get(targetUrl){
 		return Ember.$.when(
 				Ember.$.ajax({

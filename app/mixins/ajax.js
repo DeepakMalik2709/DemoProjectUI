@@ -24,7 +24,16 @@ export default Ember.Mixin.create({
 				})
 			)
 	},
-
+	doPostForm(targetUrl , json){
+		return Ember.$.when(
+				Ember.$.ajax({
+				"url" : targetUrl,
+				method : "POST",
+				contentType : "application/x-www-form-urlencoded",
+				data : json
+				})
+			)
+	},
 	doPut(targetUrl , json){
 		return Ember.$.when(
 				Ember.$.ajax({
